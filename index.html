@@ -3,12 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Opendeck: Building the infrastructure for open-finance on top of payments.">
+    <meta name="description" content="Opendeck: Building the future of open-finance infrastructure on top of payments">
     <title>Opendeck - Open-Finance Infrastructure</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'opendeck-blue': '#0052FF',
+                        'opendeck-dark': '#1A1A1A',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -16,21 +26,30 @@
         html {
             scroll-behavior: smooth;
         }
+        .gradient-bg {
+            background: linear-gradient(135deg, #0052FF 0%, #00308F 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+        }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-900">
+<body class="bg-white text-gray-900">
     <!-- Navigation -->
-    <nav class="bg-white shadow fixed w-full z-10">
+    <nav class="bg-white shadow-sm fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
+            <div class="flex justify-between h-20">
                 <div class="flex items-center">
-                    <img class="h-8 w-auto" src="https://via.placeholder.com/150x50?text=Opendeck" alt="Opendeck Logo">
+                    <img class="h-8 w-auto" src="Opendeck/opendeck final.png" alt="Opendeck Logo">
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-gray-700 hover:text-blue-600">Home</a>
-                    <a href="#features" class="text-gray-700 hover:text-blue-600">Features</a>
-                    <a href="#about" class="text-gray-700 hover:text-blue-600">About</a>
-                    <a href="#contact" class="text-gray-700 hover:text-blue-600">Contact</a>
+                    <a href="#solutions" class="text-gray-700 hover:text-opendeck-blue font-medium">Solutions</a>
+                    <a href="#features" class="text-gray-700 hover:text-opendeck-blue font-medium">Features</a>
+                    <a href="#about" class="text-gray-700 hover:text-opendeck-blue font-medium">About</a>
+                    <a href="#contact" class="bg-opendeck-blue text-white px-6 py-2 rounded-full font-medium hover:bg-blue-700 transition duration-300">Contact Us</a>
                 </div>
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="text-gray-700 focus:outline-none">
@@ -42,111 +61,210 @@
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white">
-            <div class="px-4 pt-2 pb-3 space-y-1">
-                <a href="#home" class="block text-gray-700 hover:text-blue-600">Home</a>
-                <a href="#features" class="block text-gray-700 hover:text-blue-600">Features</a>
-                <a href="#about" class="block text-gray-700 hover:text-blue-600">About</a>
-                <a href="#contact" class="block text-gray-700 hover:text-blue-600">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 pt-2 pb-3 space-y-3">
+                <a href="#solutions" class="block text-gray-700 hover:text-opendeck-blue font-medium">Solutions</a>
+                <a href="#features" class="block text-gray-700 hover:text-opendeck-blue font-medium">Features</a>
+                <a href="#about" class="block text-gray-700 hover:text-opendeck-blue font-medium">About</a>
+                <a href="#contact" class="block text-opendeck-blue font-medium">Contact Us</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="bg-gradient-to-r from-blue-600 to-blue-800 text-white pt-20 pb-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl sm:text-5xl font-bold mb-4">Opendeck: Powering Open-Finance</h1>
-            <p class="text-lg sm:text-xl mb-6">Open-finance infrastructure to create more value.</p>
-            <a href="#contact" class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-200">Get Started</a>
+    <section class="pt-32 pb-20 gradient-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="text-white">
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">Building the Future of Open-Finance Infrastructure</h1>
+                    <p class="text-xl mb-8 text-blue-100">Empowering businesses and individuals with seamless payment solutions and open-finance capabilities.</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="bg-white text-opendeck-blue px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300 text-center">Get Started</a>
+                        <a href="#solutions" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition duration-300 text-center">Learn More</a>
+                    </div>
+                </div>
+                <div class="hidden lg:block">
+                    <img src="Opendeck/opendeck final.png" alt="Opendeck Platform" class="w-full max-w-lg mx-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Solutions for Every Need</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Tailored solutions for businesses, government institutions, and individuals.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover">
+                    <img src="Opendeck/opendeck bw1.jpg" alt="Enterprise Solutions" class="h-16 mb-6">
+                    <h3 class="text-2xl font-bold mb-4">Enterprise & Government</h3>
+                    <p class="text-gray-600 mb-6">Robust infrastructure solutions designed for large-scale operations, compliance, and security.</p>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Enterprise-grade security
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Regulatory compliance
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Custom integration options
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover">
+                    <img src="Opendeck/opendeck final.png" alt="Individual Solutions" class="h-16 mb-6">
+                    <h3 class="text-2xl font-bold mb-4">Individual & Business</h3>
+                    <p class="text-gray-600 mb-6">User-friendly payment solutions that make financial operations simple and efficient.</p>
+                    <ul class="space-y-3 text-gray-600">
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Easy integration
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Flexible payment options
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            Real-time analytics
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-16 bg-white">
+    <section id="features" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-12">A fully integrated platform for open-finance</h2>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Why Choose Opendeck</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Our platform provides everything you need to build and scale your financial operations.</p>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-center">
-                    <div class="bg-blue-100 p-4 rounded-full inline-block mb-4">
-                        <svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                <div class="p-6 text-center card-hover">
+                    <div class="bg-blue-100 p-4 rounded-full inline-block mb-6">
+                        <svg class="h-8 w-8 text-opendeck-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Seamless Integration</h3>
-                    <p class="text-gray-600">Easily integrate our infrastructure with your payment systems for fast deployment.</p>
+                    <h3 class="text-xl font-bold mb-4">Lightning Fast</h3>
+                    <p class="text-gray-600">Process thousands of transactions per second with minimal latency.</p>
                 </div>
-                <div class="text-center">
-                    <div class="bg-blue-100 p-4 rounded-full inline-block mb-4">
-                        <svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0-2.76-2.24-5-5-5S2 8.24 2 11s2.24 5 5 5 5-2.24 5-5zm10 0c0-2.76-2.24-5-5-5s-5 2.24-5 5 2.24 5 5 5 5-2.24 5-5z" />
+                <div class="p-6 text-center card-hover">
+                    <div class="bg-blue-100 p-4 rounded-full inline-block mb-6">
+                        <svg class="h-8 w-8 text-opendeck-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Scalable Solutions</h3>
-                    <p class="text-gray-600">Our platform grows with your business, handling high transaction volumes effortlessly.</p>
+                    <h3 class="text-xl font-bold mb-4">Bank-Grade Security</h3>
+                    <p class="text-gray-600">Enterprise-level security with end-to-end encryption.</p>
                 </div>
-                <div class="text-center">
-                    <div class="bg-blue-100 p-4 rounded-full inline-block mb-4">
-                        <svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                <div class="p-6 text-center card-hover">
+                    <div class="bg-blue-100 p-4 rounded-full inline-block mb-6">
+                        <svg class="h-8 w-8 text-opendeck-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Secure by Design</h3>
-                    <p class="text-gray-600">Advanced security protocols to protect your transactions and data.</p>
+                    <h3 class="text-xl font-bold mb-4">Easy Integration</h3>
+                    <p class="text-gray-600">Simple API integration with comprehensive documentation.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-16 bg-gray-100">
+    <section id="about" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-12">About Opendeck</h2>
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-8 md:mb-0">
-                    <img src="https://via.placeholder.com/600x400?text=Open-Finance+Infrastructure" alt="Opendeck Infrastructure" class="rounded-lg shadow-lg">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">About Opendeck</h2>
+                    <p class="text-lg text-gray-600 mb-6">We're revolutionizing the future of payments by building robust infrastructure for open-finance. Our platform enables businesses of all sizes to create innovative, secure, and efficient payment solutions.</p>
+                    <p class="text-lg text-gray-600 mb-8">Our mission is to make financial systems more accessible, transparent, and interconnected, enabling businesses to thrive in the digital economy.</p>
+                    <div class="grid grid-cols-3 gap-6 text-center">
+                        <div>
+                            <div class="text-3xl font-bold text-opendeck-blue mb-2">99.9%</div>
+                            <div class="text-gray-600">Uptime</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-opendeck-blue mb-2">50+</div>
+                            <div class="text-gray-600">Countries</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-opendeck-blue mb-2">1M+</div>
+                            <div class="text-gray-600">Transactions</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="md:w-1/2 md:pl-8">
-                    <p class="text-lg text-gray-600 mb-4">At Opendeck, we’re revolutionizing the future of payments by building the infrastructure for open-finance. Our platform empowers businesses to create innovative, secure, and efficient payment solutions that scale with their needs.</p>
-                    <p class="text-lg text-gray-600">Our mission is to make financial systems more accessible, transparent, and interconnected, enabling businesses to thrive in the digital economy.</p>
+                <div class="relative">
+                    <img src="Opendeck/opendeck bluebg.jpg" alt="About Opendeck" class="rounded-2xl shadow-xl">
+                    <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg hidden lg:block">
+                        <img src="Opendeck/opendeck iconblu.png" alt="Opendeck Icon" class="h-12 w-12">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Call-to-Action Section -->
-    <section id="contact" class="py-16 bg-blue-600 text-white">
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 gradient-bg text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold mb-4">Ready to Transform Payments?</h2>
-            <p class="text-lg mb-6">Join Opendeck today and build the future of open-finance with us.</p>
-            <a href="mailto:info@opendeck.co.uk" class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-200">Contact Us</a>
+            <h2 class="text-3xl font-bold mb-6">Ready to Get Started?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of businesses already using Opendeck to power their financial infrastructure.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="mailto:info@opendeck.co.uk" class="bg-white text-opendeck-blue px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300">Contact Sales</a>
+                <a href="https://docs.opendeck.co.uk" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition duration-300">View Documentation</a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
+    <footer class="bg-gray-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <img class="h-8 w-auto mb-4" src="https://via.placeholder.com/150x50?text=Opendeck" alt="Opendeck Logo">
-                    <p class="text-gray-400">Building the infrastructure for open-finance on top of payments.</p>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <img src="Opendeck/opendeck iconw.png" alt="Opendeck Logo" class="h-8 w-auto mb-6">
+                    <p class="text-gray-400 max-w-md">Building the infrastructure for open-finance on top of payments. Empowering businesses and individuals with next-generation financial solutions.</p>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Links</h3>
+                    <h3 class="text-lg font-semibold mb-4">Company</h3>
                     <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-white">Home</a></li>
-                        <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
                         <li><a href="#about" class="text-gray-400 hover:text-white">About</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
                         <li><a href="#contact" class="text-gray-400 hover:text-white">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Careers</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="text-lg font-semibold mb-4">Contact</h3>
-                    <p class="text-gray-400">Email: <a href="mailto:contact@opendeck.com" class="hover:text-white">contact@opendeck.com</a></p>
-                    <p class="text-gray-400">Phone: +44 7841590622</p>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400">
+                            <a href="mailto:info@opendeck.co.uk" class="hover:text-white">info@opendeck.co.uk</a>
+                        </li>
+                        <li class="text-gray-400">+44 7841590622</li>
+                    </ul>
                 </div>
             </div>
-            <div class="mt-8 text-center text-gray-400">
-                <p>&copy; 2025 Opendeck. All rights reserved.</p>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
+                <p>&copy; 2024 Opendeck. All rights reserved.</p>
             </div>
         </div>
     </footer>
