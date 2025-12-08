@@ -116,6 +116,7 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#solutions" class="nav-link text-gray-700 hover:text-opendeck-blue font-medium">Solutions</a>
                     <a href="#features" class="nav-link text-gray-700 hover:text-opendeck-blue font-medium">Features</a>
+                    <a href="#developers" class="nav-link text-gray-700 hover:text-opendeck-blue font-medium">Developers</a>
                     <a href="#about" class="nav-link text-gray-700 hover:text-opendeck-blue font-medium">About</a>
                     <a href="#signup" class="text-gray-700 hover:text-opendeck-blue font-medium">Sign Up</a>
                     <a href="#contact" class="gradient-border bg-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition duration-300">Contact Us</a>
@@ -134,6 +135,7 @@
             <div class="px-4 pt-2 pb-3 space-y-3">
                 <a href="#solutions" class="block text-gray-700 hover:text-opendeck-blue font-medium">Solutions</a>
                 <a href="#features" class="block text-gray-700 hover:text-opendeck-blue font-medium">Features</a>
+                <a href="#developers" class="block text-gray-700 hover:text-opendeck-blue font-medium">Developers</a>
                 <a href="#about" class="block text-gray-700 hover:text-opendeck-blue font-medium">About</a>
                 <a href="#signup" class="block text-gray-700 hover:text-opendeck-blue font-medium">Sign Up</a>
                 <a href="#contact" class="block text-opendeck-blue font-medium">Contact Us</a>
@@ -272,6 +274,278 @@
                     </div>
                     <h3 class="text-xl font-bold mb-4">Easy Integration</h3>
                     <p class="text-gray-600">Simple API integration with comprehensive documentation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developers Section -->
+    <section id="developers" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Developer Documentation</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Build powerful financial applications with our comprehensive API and developer tools.</p>
+            </div>
+
+            <!-- Quick Start -->
+            <div class="mb-16 animate-on-scroll">
+                <div class="bg-gradient-to-br from-opendeck-blue to-blue-700 rounded-2xl p-8 text-white">
+                    <h3 class="text-2xl font-bold mb-4">Quick Start</h3>
+                    <p class="text-blue-100 mb-6">Get started with the Opendeck API in minutes. Our RESTful API is designed for simplicity and power.</p>
+                    <div class="bg-gray-900/50 rounded-lg p-6 mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-sm text-blue-200">Base URL</span>
+                            <button onclick="copyToClipboard('https://api.opendeck.co.uk', event)" class="text-blue-300 hover:text-white text-sm">
+                                <svg class="h-4 w-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                </svg>
+                                Copy
+                            </button>
+                        </div>
+                        <code class="text-green-400 text-sm">https://api.opendeck.co.uk</code>
+                    </div>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#api-docs" class="bg-white text-opendeck-blue px-6 py-2 rounded-full font-semibold hover:bg-gray-100 transition duration-300">View API Docs</a>
+                        <a href="#code-examples" class="glass-card border border-white/20 px-6 py-2 rounded-full font-semibold hover:bg-white/10 transition duration-300">Code Examples</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Categories -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                <div class="p-6 rounded-2xl card-hover animate-on-scroll gradient-border">
+                    <div class="bg-blue-50 p-3 rounded-xl inline-block mb-4">
+                        <svg class="h-6 w-6 text-opendeck-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Authentication</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Secure JWT-based authentication with OAuth2 support.</p>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• POST /api/auth/register</li>
+                        <li>• POST /api/auth/login</li>
+                        <li>• POST /api/auth/logout</li>
+                        <li>• GET /api/auth/me</li>
+                    </ul>
+                </div>
+
+                <div class="p-6 rounded-2xl card-hover animate-on-scroll gradient-border">
+                    <div class="bg-blue-50 p-3 rounded-xl inline-block mb-4">
+                        <svg class="h-6 w-6 text-opendeck-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Gaming & Gambling</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Payment processing for gaming operators and platforms.</p>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• POST /api/gaming/operators</li>
+                        <li>• POST /api/gaming/transactions</li>
+                        <li>• GET /api/gaming/stats</li>
+                        <li>• POST /api/gaming/affordability</li>
+                    </ul>
+                </div>
+
+                <div class="p-6 rounded-2xl card-hover animate-on-scroll gradient-border">
+                    <div class="bg-blue-50 p-3 rounded-xl inline-block mb-4">
+                        <svg class="h-6 w-6 text-opendeck-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Pension Payments</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Manage pension contributions and accounts.</p>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• GET /api/pensions/accounts</li>
+                        <li>• POST /api/pensions/pay</li>
+                        <li>• GET /api/pensions/payments</li>
+                        <li>• GET /api/pensions/providers</li>
+                    </ul>
+                </div>
+
+                <div class="p-6 rounded-2xl card-hover animate-on-scroll gradient-border">
+                    <div class="bg-blue-50 p-3 rounded-xl inline-block mb-4">
+                        <svg class="h-6 w-6 text-opendeck-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Open Banking</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Connect to UK banks via Open Banking APIs.</p>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• GET /api/banks</li>
+                        <li>• GET /api/accounts</li>
+                        <li>• POST /api/payments</li>
+                        <li>• GET /api/analytics/spending</li>
+                    </ul>
+                </div>
+
+                <div class="p-6 rounded-2xl card-hover animate-on-scroll gradient-border">
+                    <div class="bg-blue-50 p-3 rounded-xl inline-block mb-4">
+                        <svg class="h-6 w-6 text-opendeck-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Analytics & Insights</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Financial analytics and risk assessment.</p>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• GET /api/risk-assessment/{id}</li>
+                        <li>• GET /api/business-insights/{id}</li>
+                        <li>• GET /api/products</li>
+                        <li>• GET /api/offers/{user_id}</li>
+                    </ul>
+                </div>
+
+                <div class="p-6 rounded-2xl card-hover animate-on-scroll gradient-border">
+                    <div class="bg-blue-50 p-3 rounded-xl inline-block mb-4">
+                        <svg class="h-6 w-6 text-opendeck-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Admin Dashboard</h3>
+                    <p class="text-gray-600 mb-4 text-sm">Platform management and monitoring.</p>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• POST /api/admin/auth/login</li>
+                        <li>• GET /api/admin/operators</li>
+                        <li>• GET /api/admin/revenue</li>
+                        <li>• GET /api/admin/transactions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Code Examples -->
+            <div id="code-examples" class="mb-16 animate-on-scroll">
+                <h3 class="text-2xl font-bold mb-6">Code Examples</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Authentication Example -->
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="font-semibold mb-3 text-gray-800">Authentication (JavaScript)</h4>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm"><code>// Register a new user
+const response = await fetch('https://api.opendeck.co.uk/api/auth/register', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    email: 'user@example.com',
+    password: 'securePassword123',
+    firstName: 'John',
+    lastName: 'Doe'
+  })
+});
+
+const data = await response.json();
+const token = data.token; // Store for authenticated requests</code></pre>
+                    </div>
+
+                    <!-- API Request Example -->
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="font-semibold mb-3 text-gray-800">Authenticated Request (JavaScript)</h4>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm"><code>// Make authenticated API call
+const response = await fetch('https://api.opendeck.co.uk/api/accounts', {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  }
+});
+
+const accounts = await response.json();</code></pre>
+                    </div>
+
+                    <!-- Python Example -->
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="font-semibold mb-3 text-gray-800">Python Example</h4>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm"><code>import requests
+
+# Authenticate
+response = requests.post(
+    'https://api.opendeck.co.uk/api/auth/login',
+    json={'email': 'user@example.com', 'password': 'password'}
+)
+token = response.json()['token']
+
+# Make authenticated request
+headers = {'Authorization': f'Bearer {token}'}
+accounts = requests.get(
+    'https://api.opendeck.co.uk/api/accounts',
+    headers=headers
+).json()</code></pre>
+                    </div>
+
+                    <!-- Gaming Transaction Example -->
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="font-semibold mb-3 text-gray-800">Gaming Transaction (cURL)</h4>
+                        <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm"><code>curl -X POST https://api.opendeck.co.uk/api/gaming/transactions \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "operator_id": "op_123",
+    "player_id": "player_456",
+    "type": "deposit",
+    "amount": 100.00,
+    "currency": "GBP"
+  }'</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- API Documentation Links -->
+            <div id="api-docs" class="animate-on-scroll">
+                <div class="bg-gray-50 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold mb-6">Full API Documentation</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-sm">
+                            <h4 class="font-semibold mb-3 text-gray-800">Interactive API Docs</h4>
+                            <p class="text-gray-600 mb-4 text-sm">Explore all endpoints with our interactive Swagger documentation.</p>
+                            <a href="https://api.opendeck.co.uk/api/docs" target="_blank" class="text-opendeck-blue hover:underline font-medium">
+                                View Swagger Docs →
+                            </a>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm">
+                            <h4 class="font-semibold mb-3 text-gray-800">ReDoc Documentation</h4>
+                            <p class="text-gray-600 mb-4 text-sm">Beautiful, responsive API documentation with examples.</p>
+                            <a href="https://api.opendeck.co.uk/api/redoc" target="_blank" class="text-opendeck-blue hover:underline font-medium">
+                                View ReDoc →
+                            </a>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm">
+                            <h4 class="font-semibold mb-3 text-gray-800">SDKs & Libraries</h4>
+                            <p class="text-gray-600 mb-4 text-sm">Official SDKs for popular programming languages.</p>
+                            <div class="flex flex-wrap gap-2 text-sm">
+                                <span class="bg-blue-100 text-opendeck-blue px-3 py-1 rounded-full">JavaScript</span>
+                                <span class="bg-blue-100 text-opendeck-blue px-3 py-1 rounded-full">Python</span>
+                                <span class="bg-blue-100 text-opendeck-blue px-3 py-1 rounded-full">Swift</span>
+                                <span class="bg-gray-200 text-gray-600 px-3 py-1 rounded-full">Coming Soon</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl shadow-sm">
+                            <h4 class="font-semibold mb-3 text-gray-800">Webhooks</h4>
+                            <p class="text-gray-600 mb-4 text-sm">Receive real-time notifications for events.</p>
+                            <a href="#contact" class="text-opendeck-blue hover:underline font-medium">
+                                Contact for Webhook Setup →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features for Developers -->
+            <div class="mt-16 animate-on-scroll">
+                <h3 class="text-2xl font-bold mb-6">Built for Developers</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-6 rounded-xl bg-blue-50">
+                        <div class="text-3xl mb-3">⚡</div>
+                        <h4 class="font-semibold mb-2">Fast & Reliable</h4>
+                        <p class="text-gray-600 text-sm">99.9% uptime SLA with sub-100ms response times.</p>
+                    </div>
+                    <div class="p-6 rounded-xl bg-blue-50">
+                        <div class="text-3xl mb-3">🔒</div>
+                        <h4 class="font-semibold mb-2">Secure by Default</h4>
+                        <p class="text-gray-600 text-sm">Bank-grade encryption and PSD2 compliance.</p>
+                    </div>
+                    <div class="p-6 rounded-xl bg-blue-50">
+                        <div class="text-3xl mb-3">📚</div>
+                        <h4 class="font-semibold mb-2">Comprehensive Docs</h4>
+                        <p class="text-gray-600 text-sm">Detailed guides, examples, and best practices.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -685,6 +959,27 @@
                 window.location.href = '/dashboard'; // Update with your dashboard URL
             }
         });
+
+        // Copy to clipboard function
+        function copyToClipboard(text, event) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Show temporary success message
+                if (event && event.target) {
+                    const button = event.target.closest('button');
+                    if (button) {
+                        const originalText = button.innerHTML;
+                        button.innerHTML = '<svg class="h-4 w-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Copied!';
+                        button.classList.add('text-green-400');
+                        setTimeout(() => {
+                            button.innerHTML = originalText;
+                            button.classList.remove('text-green-400');
+                        }, 2000);
+                    }
+                }
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
     </script>
 </body>
 </html>
