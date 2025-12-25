@@ -43,234 +43,378 @@
       ]
     }
     </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'opendeck-blue': '#0052FF',
-                        'opendeck-dark': '#1A1A1A',
+                        'opendeck': {
+                            '50': '#f0f5ff',
+                            '100': '#e0ebff',
+                            '200': '#c7d9ff',
+                            '300': '#a4bfff',
+                            '400': '#8199ff',
+                            '500': '#0052FF',
+                            '600': '#0047e6',
+                            '700': '#0038b8',
+                            '800': '#002d91',
+                            '900': '#002675',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
                     },
                     animation: {
-                        'fade-in': 'fadeIn 0.5s ease-in',
-                        'slide-up': 'slideUp 0.5s ease-out',
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'slide-in-right': 'slideInRight 0.6s ease-out',
+                        'scale-in': 'scaleIn 0.5s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
                     },
                     keyframes: {
                         fadeIn: {
                             '0%': { opacity: '0' },
                             '100%': { opacity: '1' },
                         },
-                        slideUp: {
-                            '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
-                        }
-                    }
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.95)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                    },
                 }
             }
         }
     </script>
+    
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            letter-spacing: -0.01em;
+        }
+        
         html {
             scroll-behavior: smooth;
         }
-        .gradient-bg {
-            background: linear-gradient(135deg, #0052FF 0%, #00308F 100%);
+        
+        /* Premium gradient backgrounds */
+        .gradient-hero {
+            background: linear-gradient(135deg, #0052FF 0%, #0038b8 50%, #002675 100%);
         }
+        
         .gradient-text {
-            background: linear-gradient(135deg, #0052FF 0%, #00308F 100%);
-            background-clip: text;
+            background: linear-gradient(135deg, #0052FF 0%, #0038b8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .card-hover {
-            transition: all 0.3s ease;
+        
+        .gradient-border {
+            position: relative;
+            background: white;
+            border-radius: 12px;
         }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 82, 255, 0.1);
+        
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            padding: 2px;
+            background: linear-gradient(135deg, #0052FF, #0038b8);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
         }
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        
+        /* Premium card styles */
+        .premium-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
+        
+        .premium-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 82, 255, 0.1), 0 10px 10px -5px rgba(0, 82, 255, 0.04);
         }
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
+        
+        /* Glass morphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
+        
+        /* Premium button styles */
+        .btn-primary {
+            background: linear-gradient(135deg, #0052FF 0%, #0038b8 100%);
+            color: white;
+            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 14px 0 rgba(0, 82, 255, 0.39);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px 0 rgba(0, 82, 255, 0.5);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #0052FF;
+            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 12px;
+            border: 2px solid #0052FF;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-secondary:hover {
+            background: #0052FF;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px 0 rgba(0, 82, 255, 0.3);
+        }
+        
+        /* Navigation */
         .nav-link {
             position: relative;
+            color: #4b5563;
+            font-weight: 500;
+            transition: color 0.2s;
         }
+        
+        .nav-link:hover {
+            color: #0052FF;
+        }
+        
         .nav-link::after {
             content: '';
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: -4px;
+            bottom: -6px;
             left: 0;
-            background-color: #0052FF;
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, #0052FF, #0038b8);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        
         .nav-link:hover::after {
             width: 100%;
         }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        
+        /* Scroll animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .gradient-border {
-            position: relative;
-            background: linear-gradient(white, white) padding-box,
-                        linear-gradient(135deg, #0052FF, #00308F) border-box;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-        .gradient-border:hover {
-            background: linear-gradient(white, white) padding-box,
-                        linear-gradient(135deg, #00308F, #0052FF) border-box;
+        
+        /* Feature icon backgrounds */
+        .icon-bg {
+            background: linear-gradient(135deg, rgba(0, 82, 255, 0.1) 0%, rgba(0, 56, 184, 0.1) 100%);
+            border-radius: 12px;
+        }
+        
+        /* Stats cards */
+        .stat-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Hero background pattern */
+        .hero-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 82, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 56, 184, 0.1) 0%, transparent 50%);
         }
     </style>
 </head>
 <body class="bg-white text-gray-900">
     <!-- Navigation -->
-    <nav class="bg-white/80 backdrop-blur-md fixed w-full z-50 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20">
+    <nav class="fixed top-0 left-0 right-0 z-50 glass transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
                 <div class="flex items-center">
-                    <img class="h-8 w-auto" src="Opendeck/opendeck final.png" alt="Opendeck Logo">
+                    <a href="/" class="flex items-center space-x-3">
+                        <img class="h-9 w-auto" src="Opendeck/opendeck final.png" alt="Opendeck Logo">
+                    </a>
                 </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#solutions" class="nav-link text-gray-700 hover:text-opendeck-blue font-medium">Solutions</a>
-                    <a href="#features" class="nav-link text-gray-700 hover:text-opendeck-blue font-medium">Features</a>
-                    <a href="developers.html" class="nav-link text-gray-700 hover:text-opendeck-blue font-medium">Developers</a>
-                    <a href="#about" class="nav-link text-gray-700 hover:text-opendeck-blue font-medium">About</a>
-                    <a href="signin.html" class="text-gray-700 hover:text-opendeck-blue font-medium">Sign In</a>
-                    <a href="#contact" class="gradient-border bg-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition duration-300">Contact Us</a>
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#solutions" class="nav-link text-sm">Solutions</a>
+                    <a href="#features" class="nav-link text-sm">Features</a>
+                    <a href="developers.html" class="nav-link text-sm">Developers</a>
+                    <a href="#about" class="nav-link text-sm">About</a>
+                    <a href="signin.html" class="nav-link text-sm">Sign In</a>
+                    <a href="#contact" class="btn-primary text-sm">Contact Us</a>
                 </div>
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-700 focus:outline-none">
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="p-2 text-gray-700">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
                     </button>
                 </div>
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white/80 backdrop-blur-md border-t">
-            <div class="px-4 pt-2 pb-3 space-y-3">
-                <a href="#solutions" class="block text-gray-700 hover:text-opendeck-blue font-medium">Solutions</a>
-                <a href="#features" class="block text-gray-700 hover:text-opendeck-blue font-medium">Features</a>
-                <a href="developers.html" class="block text-gray-700 hover:text-opendeck-blue font-medium">Developers</a>
-                <a href="#about" class="block text-gray-700 hover:text-opendeck-blue font-medium">About</a>
-                <a href="signin.html" class="block text-gray-700 hover:text-opendeck-blue font-medium">Sign In</a>
-                <a href="#contact" class="block text-opendeck-blue font-medium">Contact Us</a>
+        <div id="mobile-menu" class="hidden md:hidden glass border-t">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#solutions" class="block text-gray-700 hover:text-opendeck-500 font-medium">Solutions</a>
+                <a href="#features" class="block text-gray-700 hover:text-opendeck-500 font-medium">Features</a>
+                <a href="developers.html" class="block text-gray-700 hover:text-opendeck-500 font-medium">Developers</a>
+                <a href="#about" class="block text-gray-700 hover:text-opendeck-500 font-medium">About</a>
+                <a href="signin.html" class="block text-gray-700 hover:text-opendeck-500 font-medium">Sign In</a>
+                <a href="#contact" class="block btn-primary text-center">Contact Us</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section class="pt-32 pb-24 hero-pattern">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="animate-on-scroll">
-                    <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-opendeck-50 text-opendeck-600 text-sm font-medium mb-6">
+                        <span class="mr-2">✨</span> New: Events & Entertainment Integration
+                    </div>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 tracking-tight">
                         <span class="gradient-text">Open-Finance</span><br>
-                        Infrastructure for the Future
+                        Infrastructure<br>
+                        <span class="text-gray-900">for the Future</span>
                     </h1>
-                    <p class="text-xl text-gray-600 mb-8">Empowering businesses and individuals with seamless payment solutions and open-finance capabilities.</p>
+                    <p class="text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl">
+                        Empowering businesses and individuals with seamless payment solutions and open-finance capabilities. Built for scale, designed for developers.
+                    </p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#contact" class="bg-opendeck-blue text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition duration-300 text-center shadow-lg hover:shadow-xl">Get Started</a>
-                        <a href="#solutions" class="gradient-border px-8 py-3 rounded-full font-semibold transition duration-300 text-center">Learn More</a>
+                        <a href="#contact" class="btn-primary text-center">Get Started</a>
+                        <a href="developers.html" class="btn-secondary text-center">View Docs</a>
+                    </div>
+                    <div class="mt-12 flex items-center space-x-8 text-sm text-gray-500">
+                        <div class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            PSD2 Compliant
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            Bank-Grade Security
+                        </div>
                     </div>
                 </div>
                 <div class="hidden lg:block relative animate-on-scroll">
-                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-transparent rounded-3xl filter blur-3xl"></div>
-                    <img src="Opendeck/opendeck final.png" alt="Opendeck Platform" class="w-full max-w-lg mx-auto relative z-10">
+                    <div class="absolute inset-0 bg-gradient-to-r from-opendeck-500/20 to-opendeck-700/20 rounded-3xl blur-3xl transform scale-110"></div>
+                    <div class="relative z-10 premium-card p-8">
+                        <img src="Opendeck/opendeck final.png" alt="Opendeck Platform" class="w-full h-auto rounded-lg">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Solutions Section -->
-    <section id="solutions" class="py-20 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 animate-on-scroll">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Solutions for Every Scale</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Tailored solutions that grow with your business.</p>
+    <section id="solutions" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-20 animate-on-scroll">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Solutions for Every Scale</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Tailored solutions that grow with your business, from startups to enterprises.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-lg card-hover animate-on-scroll">
-                    <img src="Opendeck/opendeck bw1.jpg" alt="Enterprise Solutions" class="h-16 mb-6">
+                <div class="premium-card p-10 animate-on-scroll">
+                    <div class="icon-bg w-16 h-16 flex items-center justify-center rounded-xl mb-6">
+                        <svg class="h-8 w-8 text-opendeck-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                    </div>
                     <h3 class="text-2xl font-bold mb-4">Enterprise & Government</h3>
-                    <p class="text-gray-600 mb-6">Enterprise-grade infrastructure designed for scale, compliance, and security.</p>
-                    <ul class="space-y-4 text-gray-600">
-                        <li class="flex items-center">
-                            <div class="bg-green-100 p-1 rounded-full mr-3">
-                                <svg class="h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <span>Multi-region deployment</span>
+                    <p class="text-gray-600 mb-8 text-lg leading-relaxed">Enterprise-grade infrastructure designed for scale, compliance, and security. Trusted by governments and Fortune 500 companies.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-700">Multi-region deployment with 99.99% uptime SLA</span>
                         </li>
-                        <li class="flex items-center">
-                            <div class="bg-green-100 p-1 rounded-full mr-3">
-                                <svg class="h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <span>Advanced compliance tools</span>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-700">Advanced compliance tools (GDPR, PCI-DSS, SOC 2)</span>
                         </li>
-                        <li class="flex items-center">
-                            <div class="bg-green-100 p-1 rounded-full mr-3">
-                                <svg class="h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <span>Dedicated support team</span>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-gray-700">Dedicated support team with 24/7 availability</span>
                         </li>
                     </ul>
                 </div>
-                <div class="bg-gradient-to-br from-opendeck-blue to-blue-700 p-8 rounded-2xl shadow-lg card-hover text-white animate-on-scroll">
-                    <img src="Opendeck/opendeck final.png" alt="Individual Solutions" class="h-16 mb-6">
+                <div class="premium-card p-10 bg-gradient-hero text-white animate-on-scroll">
+                    <div class="bg-white/20 w-16 h-16 flex items-center justify-center rounded-xl mb-6 backdrop-blur-sm">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
                     <h3 class="text-2xl font-bold mb-4">Business & Individual</h3>
-                    <p class="text-blue-100 mb-6">Powerful yet simple solutions for growing businesses and entrepreneurs.</p>
-                    <ul class="space-y-4 text-blue-100">
-                        <li class="flex items-center">
-                            <div class="bg-white/10 p-1 rounded-full mr-3">
-                                <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <span>Quick integration</span>
+                    <p class="text-blue-100 mb-8 text-lg leading-relaxed">Powerful yet simple solutions for growing businesses and entrepreneurs. Get started in minutes, scale to millions.</p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-white mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-blue-50">Quick integration with comprehensive SDKs</span>
                         </li>
-                        <li class="flex items-center">
-                            <div class="bg-white/10 p-1 rounded-full mr-3">
-                                <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <span>Real-time analytics</span>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-white mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-blue-50">Real-time analytics and insights dashboard</span>
                         </li>
-                        <li class="flex items-center">
-                            <div class="bg-white/10 p-1 rounded-full mr-3">
-                                <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                                </svg>
-                            </div>
-                            <span>Pay-as-you-grow pricing</span>
+                        <li class="flex items-start">
+                            <svg class="h-6 w-6 text-white mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-blue-50">Pay-as-you-grow pricing with no hidden fees</span>
                         </li>
                     </ul>
                 </div>
@@ -279,124 +423,121 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 animate-on-scroll">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Built for Scale</h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Enterprise-grade infrastructure with developer-first design.</p>
+    <section id="features" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-20 animate-on-scroll">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Built for Scale</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Enterprise-grade infrastructure with developer-first design principles.</p>
             </div>
-            <div class="feature-grid">
-                <div class="p-8 rounded-2xl card-hover animate-on-scroll gradient-border">
-                    <div class="bg-blue-50 p-4 rounded-xl inline-block mb-6">
-                        <svg class="h-8 w-8 text-opendeck-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="premium-card p-8 animate-on-scroll">
+                    <div class="icon-bg w-14 h-14 flex items-center justify-center rounded-xl mb-6">
+                        <svg class="h-7 w-7 text-opendeck-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Lightning Fast</h3>
-                    <p class="text-gray-600">Process thousands of transactions per second with minimal latency.</p>
+                    <h3 class="text-xl font-bold mb-3">Lightning Fast</h3>
+                    <p class="text-gray-600 leading-relaxed">Process thousands of transactions per second with sub-100ms latency. Built on modern infrastructure for peak performance.</p>
                 </div>
-                <div class="p-8 rounded-2xl card-hover animate-on-scroll gradient-border">
-                    <div class="bg-blue-50 p-4 rounded-xl inline-block mb-6">
-                        <svg class="h-8 w-8 text-opendeck-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="premium-card p-8 animate-on-scroll">
+                    <div class="icon-bg w-14 h-14 flex items-center justify-center rounded-xl mb-6">
+                        <svg class="h-7 w-7 text-opendeck-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Bank-Grade Security</h3>
-                    <p class="text-gray-600">Enterprise-level security with end-to-end encryption.</p>
+                    <h3 class="text-xl font-bold mb-3">Bank-Grade Security</h3>
+                    <p class="text-gray-600 leading-relaxed">Enterprise-level security with end-to-end encryption, fraud detection, and compliance with global standards.</p>
                 </div>
-                <div class="p-8 rounded-2xl card-hover animate-on-scroll gradient-border">
-                    <div class="bg-blue-50 p-4 rounded-xl inline-block mb-6">
-                        <svg class="h-8 w-8 text-opendeck-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                <div class="premium-card p-8 animate-on-scroll">
+                    <div class="icon-bg w-14 h-14 flex items-center justify-center rounded-xl mb-6">
+                        <svg class="h-7 w-7 text-opendeck-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-4">Easy Integration</h3>
-                    <p class="text-gray-600">Simple API integration with comprehensive documentation.</p>
+                    <h3 class="text-xl font-bold mb-3">Easy Integration</h3>
+                    <p class="text-gray-600 leading-relaxed">Simple REST API with comprehensive documentation, SDKs for popular languages, and interactive code examples.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-50 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <section id="about" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="animate-on-scroll">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6">About Opendeck</h2>
-                    <p class="text-lg text-gray-600 mb-6">We're revolutionizing the future of payments by building robust infrastructure for open-finance. Our platform enables businesses of all sizes to create innovative, secure, and efficient payment solutions.</p>
-                    <p class="text-lg text-gray-600 mb-8">Our mission is to make financial systems more accessible, transparent, and interconnected, enabling businesses to thrive in the digital economy.</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">About Opendeck</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">We're revolutionizing the future of payments by building robust infrastructure for open-finance. Our platform enables businesses of all sizes to create innovative, secure, and efficient payment solutions.</p>
+                    <p class="text-lg text-gray-600 mb-10 leading-relaxed">Our mission is to make financial systems more accessible, transparent, and interconnected, enabling businesses to thrive in the digital economy.</p>
                     <div class="grid grid-cols-3 gap-6">
-                        <div class="glass-card p-6 rounded-xl text-center">
-                            <div class="text-3xl font-bold gradient-text mb-2">99.9%</div>
-                            <div class="text-gray-600">Uptime</div>
+                        <div class="stat-card p-6 rounded-xl text-center">
+                            <div class="text-4xl font-bold gradient-text mb-2">99.9%</div>
+                            <div class="text-gray-600 font-medium">Uptime</div>
                         </div>
-                        <div class="glass-card p-6 rounded-xl text-center">
-                            <div class="text-3xl font-bold gradient-text mb-2">50+</div>
-                            <div class="text-gray-600">Countries</div>
+                        <div class="stat-card p-6 rounded-xl text-center">
+                            <div class="text-4xl font-bold gradient-text mb-2">50+</div>
+                            <div class="text-gray-600 font-medium">Countries</div>
                         </div>
-                        <div class="glass-card p-6 rounded-xl text-center">
-                            <div class="text-3xl font-bold gradient-text mb-2">1M+</div>
-                            <div class="text-gray-600">Transactions</div>
+                        <div class="stat-card p-6 rounded-xl text-center">
+                            <div class="text-4xl font-bold gradient-text mb-2">1M+</div>
+                            <div class="text-gray-600 font-medium">Transactions</div>
                         </div>
                     </div>
                 </div>
                 <div class="relative animate-on-scroll">
-                    <div class="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-transparent rounded-3xl filter blur-3xl"></div>
-                    <img src="Opendeck/opendeck bluebg.jpg" alt="About Opendeck" class="rounded-2xl shadow-xl relative z-10">
-                    <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-xl shadow-lg hidden lg:block">
-                        <img src="Opendeck/opendeck iconblu.png" alt="Opendeck Icon" class="h-12 w-12">
+                    <div class="absolute inset-0 bg-gradient-to-r from-opendeck-500/10 to-transparent rounded-3xl blur-3xl transform scale-110"></div>
+                    <div class="relative z-10 premium-card p-2">
+                        <img src="Opendeck/opendeck bluebg.jpg" alt="About Opendeck" class="rounded-xl w-full h-auto">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-
     <!-- Contact Section -->
-    <section id="contact" class="py-20 gradient-bg relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-blue-900/30 backdrop-blur-sm"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="contact" class="py-24 gradient-hero relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-opendeck-900/50 to-opendeck-700/50"></div>
+        <div class="max-w-4xl mx-auto px-6 lg:px-8 relative z-10">
             <div class="text-center animate-on-scroll">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6 text-white">Ready to Get Started?</h2>
-                <p class="text-xl mb-8 max-w-2xl mx-auto text-blue-100">Join thousands of businesses already using Opendeck to power their financial infrastructure.</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">Ready to Get Started?</h2>
+                <p class="text-xl mb-10 text-blue-100 max-w-2xl mx-auto leading-relaxed">Join thousands of businesses already using Opendeck to power their financial infrastructure.</p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="mailto:info@opendeck.co.uk" class="bg-white text-opendeck-blue px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300 shadow-lg hover:shadow-xl">Contact Sales</a>
-                    <a href="developers.html" class="glass-card border border-white/20 text-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition duration-300">View Documentation</a>
+                    <a href="mailto:info@opendeck.co.uk" class="bg-white text-opendeck-500 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">Contact Sales</a>
+                    <a href="developers.html" class="glass text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/20 transition-all duration-300 border border-white/30">View Documentation</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
                 <div class="col-span-1 md:col-span-2">
-                    <img src="Opendeck/opendeck iconw.png" alt="Opendeck Logo" class="h-8 w-auto mb-6">
-                    <p class="text-gray-400 max-w-md">Building the infrastructure for open-finance on top of payments. Empowering businesses and individuals with next-generation financial solutions.</p>
-                    <p class="text-gray-400 max-w-md">PSD2 compliant.</p>
+                    <img src="Opendeck/opendeck iconw.png" alt="Opendeck Logo" class="h-10 w-auto mb-6">
+                    <p class="text-gray-400 max-w-md mb-4 leading-relaxed">Building the infrastructure for open-finance on top of payments. Empowering businesses and individuals with next-generation financial solutions.</p>
+                    <p class="text-gray-500 text-sm">PSD2 compliant • Bank-grade security</p>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Company</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#about" class="text-gray-400 hover:text-white transition duration-200">About</a></li>
-                        <li><a href="#features" class="text-gray-400 hover:text-white transition duration-200">Features</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-200">Contact</a></li>
-                        <li><a href="developers.html" class="text-gray-400 hover:text-white transition duration-200">Documentation</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition duration-200">Careers</a></li>
+                    <h3 class="text-lg font-semibold mb-6">Company</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="developers.html" class="text-gray-400 hover:text-white transition-colors">Documentation</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
-                    <ul class="space-y-2">
+                    <h3 class="text-lg font-semibold mb-6">Contact</h3>
+                    <ul class="space-y-3">
                         <li class="text-gray-400">
-                            <a href="mailto:info@opendeck.co.uk" class="hover:text-white transition duration-200">info@opendeck.co.uk</a>
+                            <a href="mailto:info@opendeck.co.uk" class="hover:text-white transition-colors">info@opendeck.co.uk</a>
                         </li>
                         <li class="text-gray-400">+44 7841590622</li>
                     </ul>
                 </div>
             </div>
-            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400">
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-500">
                 <p>&copy; 2024 Opendeck. All rights reserved.</p>
             </div>
         </div>
@@ -408,11 +549,11 @@
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 
-        mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn?.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Scroll animations
+        // Scroll animations with Intersection Observer
         const observerOptions = {
             root: null,
             rootMargin: '0px',
@@ -432,18 +573,13 @@
         });
 
         // Navbar scroll effect
-        const navbar = document.querySelector('nav');
+        const navbar = document.getElementById('navbar');
         let lastScroll = 0;
 
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
             
-            if (currentScroll <= 0) {
-                navbar.classList.remove('shadow-lg');
-                return;
-            }
-            
-            if (currentScroll > lastScroll) {
+            if (currentScroll > 100) {
                 navbar.classList.add('shadow-lg');
             } else {
                 navbar.classList.remove('shadow-lg');
@@ -452,11 +588,10 @@
             lastScroll = currentScroll;
         });
 
-        // Check if user is already logged in (sandbox) - redirect to signin if not
+        // Check if user is already logged in
         window.addEventListener('DOMContentLoaded', () => {
             const apiKey = localStorage.getItem('opendeck_api_key');
             if (apiKey) {
-                // User is already authenticated, redirect to appropriate dashboard
                 if (apiKey.startsWith('opdk_live_')) {
                     window.location.href = '/merchant-dashboard';
                 } else {
@@ -464,7 +599,6 @@
                 }
             }
         });
-
     </script>
 </body>
 </html>
