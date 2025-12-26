@@ -234,6 +234,97 @@
             width: 100%;
         }
         
+        /* Products Dropdown */
+        .products-dropdown {
+            position: relative;
+        }
+        
+        .products-trigger {
+            position: relative;
+            color: #4b5563;
+            font-weight: 500;
+            transition: color 0.2s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .products-trigger:hover {
+            color: #0052FF;
+        }
+        
+        .products-trigger::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -6px;
+            left: 0;
+            background: linear-gradient(90deg, #0052FF, #0038b8);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .products-trigger:hover::after {
+            width: 100%;
+        }
+        
+        .products-trigger.active {
+            color: #0052FF;
+        }
+        
+        .products-trigger.active::after {
+            width: 100%;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 1rem);
+            left: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            min-width: 240px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 0.5rem 0;
+        }
+        
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .dropdown-item {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: #4b5563;
+            text-decoration: none;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+        
+        .dropdown-item:hover {
+            background: #f0f5ff;
+            color: #0052FF;
+        }
+        
+        .dropdown-item-title {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+        
+        .dropdown-item-desc {
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+        
         /* Scroll animations */
         .animate-on-scroll {
             opacity: 0;
@@ -278,6 +369,36 @@
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-10">
+                    <div class="products-dropdown">
+                        <div class="products-trigger text-sm" id="products-trigger">
+                            Products
+                            <svg class="h-4 w-4 ml-1 transition-transform duration-200" id="products-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                        <div class="dropdown-menu" id="products-dropdown">
+                            <a href="#solutions" class="dropdown-item">
+                                <div class="dropdown-item-title">Gaming & Gambling</div>
+                                <div class="dropdown-item-desc">Payment processing for gaming operators</div>
+                            </a>
+                            <a href="developers.html#pension-providers" class="dropdown-item">
+                                <div class="dropdown-item-title">Pension Payments</div>
+                                <div class="dropdown-item-desc">Automated pension contributions</div>
+                            </a>
+                            <a href="developers.html#utility-providers" class="dropdown-item">
+                                <div class="dropdown-item-title">Utility Payments</div>
+                                <div class="dropdown-item-desc">ML-powered utility bill payments</div>
+                            </a>
+                            <a href="developers.html#events-entertainment" class="dropdown-item">
+                                <div class="dropdown-item-title">Events & Entertainment</div>
+                                <div class="dropdown-item-desc">Pension micro-contributions from events</div>
+                            </a>
+                            <a href="developers.html" class="dropdown-item">
+                                <div class="dropdown-item-title">Open Banking</div>
+                                <div class="dropdown-item-desc">PSD2 compliant banking integration</div>
+                            </a>
+                        </div>
+                    </div>
                     <a href="#solutions" class="nav-link text-sm">Solutions</a>
                     <a href="#features" class="nav-link text-sm">Features</a>
                     <a href="developers.html" class="nav-link text-sm">Developers</a>
@@ -297,6 +418,21 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden glass border-t">
             <div class="px-6 py-4 space-y-4">
+                <div>
+                    <button id="mobile-products-trigger" class="w-full flex items-center justify-between text-gray-700 hover:text-opendeck-500 font-medium">
+                        Products
+                        <svg class="h-4 w-4 transition-transform duration-200" id="mobile-products-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="mobile-products-dropdown" class="hidden pl-4 pt-2 space-y-2">
+                        <a href="#solutions" class="block text-gray-600 hover:text-opendeck-500 text-sm">Gaming & Gambling</a>
+                        <a href="developers.html#pension-providers" class="block text-gray-600 hover:text-opendeck-500 text-sm">Pension Payments</a>
+                        <a href="developers.html#utility-providers" class="block text-gray-600 hover:text-opendeck-500 text-sm">Utility Payments</a>
+                        <a href="developers.html#events-entertainment" class="block text-gray-600 hover:text-opendeck-500 text-sm">Events & Entertainment</a>
+                        <a href="developers.html" class="block text-gray-600 hover:text-opendeck-500 text-sm">Open Banking</a>
+                    </div>
+                </div>
                 <a href="#solutions" class="block text-gray-700 hover:text-opendeck-500 font-medium">Solutions</a>
                 <a href="#features" class="block text-gray-700 hover:text-opendeck-500 font-medium">Features</a>
                 <a href="developers.html" class="block text-gray-700 hover:text-opendeck-500 font-medium">Developers</a>
@@ -313,7 +449,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="animate-on-scroll">
                     <div class="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-opendeck-500/10 to-opendeck-600/10 border border-opendeck-500/20 text-opendeck-700 text-sm font-semibold mb-6">
-                        <span class="mr-2">🚀</span> The World's First ML-Powered Open-Finance Payments Platform
+                        The World's First ML-Powered Open-Finance Payments Platform
                     </div>
                     <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 tracking-tight">
                         <span class="gradient-text">Open-Finance</span><br>
@@ -372,19 +508,19 @@
                         <li class="flex items-start">
                             <svg class="h-6 w-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
+                                </svg>
                             <span class="text-gray-700">Multi-region deployment with 99.99% uptime SLA</span>
                         </li>
                         <li class="flex items-start">
                             <svg class="h-6 w-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
+                                </svg>
                             <span class="text-gray-700">Advanced compliance tools (GDPR, PCI-DSS, SOC 2)</span>
                         </li>
                         <li class="flex items-start">
                             <svg class="h-6 w-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
+                                </svg>
                             <span class="text-gray-700">Dedicated support team with 24/7 availability</span>
                         </li>
                     </ul>
@@ -401,19 +537,19 @@
                         <li class="flex items-start">
                             <svg class="h-6 w-6 text-white mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
+                                </svg>
                             <span class="text-blue-50">Quick integration with comprehensive SDKs</span>
                         </li>
                         <li class="flex items-start">
                             <svg class="h-6 w-6 text-white mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
+                                </svg>
                             <span class="text-blue-50">Real-time analytics and insights dashboard</span>
                         </li>
                         <li class="flex items-start">
                             <svg class="h-6 w-6 text-white mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                            </svg>
+                                </svg>
                             <span class="text-blue-50">Pay-as-you-grow pricing with no hidden fees</span>
                         </li>
                     </ul>
@@ -548,6 +684,63 @@
 
     <!-- JavaScript -->
     <script>
+        // Products Dropdown
+        const productsTrigger = document.getElementById('products-trigger');
+        const productsDropdown = document.getElementById('products-dropdown');
+        const productsArrow = document.getElementById('products-arrow');
+        
+        if (productsTrigger && productsDropdown) {
+            productsTrigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                const isOpen = productsDropdown.classList.contains('show');
+                
+                if (isOpen) {
+                    productsDropdown.classList.remove('show');
+                    productsTrigger.classList.remove('active');
+                    productsArrow.style.transform = 'rotate(0deg)';
+                } else {
+                    // Close any other open dropdowns
+                    document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                        if (menu !== productsDropdown) {
+                            menu.classList.remove('show');
+                        }
+                    });
+                    
+                    productsDropdown.classList.add('show');
+                    productsTrigger.classList.add('active');
+                    productsArrow.style.transform = 'rotate(180deg)';
+                }
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!productsTrigger.contains(e.target) && !productsDropdown.contains(e.target)) {
+                    productsDropdown.classList.remove('show');
+                    productsTrigger.classList.remove('active');
+                    productsArrow.style.transform = 'rotate(0deg)';
+                }
+            });
+        }
+        
+        // Mobile Products Dropdown
+        const mobileProductsTrigger = document.getElementById('mobile-products-trigger');
+        const mobileProductsDropdown = document.getElementById('mobile-products-dropdown');
+        const mobileProductsArrow = document.getElementById('mobile-products-arrow');
+        
+        if (mobileProductsTrigger && mobileProductsDropdown) {
+            mobileProductsTrigger.addEventListener('click', () => {
+                const isOpen = !mobileProductsDropdown.classList.contains('hidden');
+                
+                if (isOpen) {
+                    mobileProductsDropdown.classList.add('hidden');
+                    mobileProductsArrow.style.transform = 'rotate(0deg)';
+                } else {
+                    mobileProductsDropdown.classList.remove('hidden');
+                    mobileProductsArrow.style.transform = 'rotate(180deg)';
+                }
+            });
+        }
+        
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
