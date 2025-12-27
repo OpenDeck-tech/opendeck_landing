@@ -857,49 +857,354 @@ Content-Type: application/json
                     </div>
                 </div>
 
-                <div id="pension-providers" class="bg-green-50 rounded-xl p-8">
-                    <h4 class="text-xl font-semibold mb-4 text-gray-800">For Pension Service Providers</h4>
-                    <p class="text-gray-700 mb-4">Pension providers (NEST, Aviva, Standard Life, etc.) can integrate with Opendeck to enable pension contribution payments from users.</p>
+                <div id="pension-providers" class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 border border-green-200">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-green-100 rounded-lg p-3 mr-4">
+                            <svg class="h-8 w-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold mb-1 text-gray-800">For Pension Service Providers</h4>
+                            <p class="text-gray-600 text-sm">Production-ready integration guide for pension providers</p>
+                        </div>
+                    </div>
                     
-                    <div class="bg-white rounded-lg p-6 mb-4">
-                        <h5 class="font-semibold mb-3 text-gray-800">Step 1: Register as an Operator</h5>
-                        <p class="text-gray-700 mb-3">Pension providers use the same operator registration endpoint as gaming operators:</p>
-                        <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-3"><code>POST /api/gaming/operators
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded">
+                        <p class="text-sm text-yellow-800"><strong>🔒 Security First:</strong> All connections are encrypted, authenticated, and comply with PSD2 and GDPR regulations. Your API credentials are hashed and never stored in plain text.</p>
+                    </div>
+
+                    <!-- Step 1: Registration -->
+                    <div class="bg-white rounded-lg p-6 mb-4 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 text-sm">1</span>
+                            <h5 class="font-bold text-lg text-gray-800">Register as a Pension Provider</h5>
+                        </div>
+                        <p class="text-gray-700 mb-4">Start by registering your pension provider organization with Opendeck. This creates your operator account and generates secure API credentials.</p>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-xs text-gray-600 mb-2 font-semibold uppercase tracking-wide">API Endpoint</p>
+                            <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-3"><code>POST https://api.opendeck.co.uk/api/gaming/operators
 Content-Type: application/json
 
 {
-  "company_name": "Pension Provider Ltd",
-  "trading_name": "Your Pension Service",
-  "contact_email": "api@pensionprovider.com",
+  "company_name": "NEST Corporation",
+  "trading_name": "NEST Pensions",
+  "contact_email": "api@nestpensions.com",
   "contact_phone": "+44 20 1234 5678",
-  "company_number": "12345678",
-  "website_url": "https://pensionprovider.com"
+  "company_number": "RC000727",
+  "website_url": "https://www.nestpensions.org.uk",
+  "webhook_url": "https://api.nestpensions.com/webhooks/opendeck"
 }</code></pre>
-                        <p class="text-sm text-gray-600">Note: <code class="bg-gray-100 px-1 rounded">uk_gambling_license</code> is optional for pension providers.</p>
-                    </div>
+                        </div>
 
-                    <div class="bg-white rounded-lg p-6 mb-4">
-                        <h5 class="font-semibold mb-3 text-gray-800">Step 2: Account Activation</h5>
-                        <p class="text-gray-700 mb-3">Pension provider accounts require activation by Opendeck for compliance and verification purposes.</p>
-                        <p class="text-gray-700 mb-3">After registration, Opendeck will:</p>
-                        <ul class="list-disc list-inside text-gray-700 mb-3 space-y-1 text-sm">
-                            <li>Verify your company registration</li>
-                            <li>Review compliance requirements</li>
-                            <li>Activate your account (typically 1-2 business days)</li>
-                        </ul>
-                        <div class="bg-blue-50 border-l-4 border-blue-400 p-4">
-                            <p class="text-sm text-blue-800"><strong>Activation Status:</strong> Check your account status by calling <code class="bg-blue-100 px-1 rounded">GET /api/gaming/operators/me</code> with your API key. Status will change from <code class="bg-blue-100 px-1 rounded">pending</code> to <code class="bg-blue-100 px-1 rounded">active</code> when approved.</p>
+                        <div class="bg-blue-50 rounded-lg p-4 mb-3">
+                            <p class="text-sm text-blue-800 mb-2"><strong>Response:</strong> You'll receive your API credentials immediately:</p>
+                            <pre class="bg-gray-900 text-blue-400 p-3 rounded text-xs overflow-x-auto"><code>{
+  "operator_id": "550e8400-e29b-41d4-a716-446655440000",
+  "api_key": "opdk_live_abc123...",
+  "api_secret": "opdk_secret_xyz789..."
+}</code></pre>
+                            <p class="text-xs text-red-600 mt-2 font-semibold">⚠️ CRITICAL: Save these credentials immediately! They are only shown once and cannot be recovered.</p>
+                        </div>
+
+                        <div class="mt-4 space-y-2 text-sm text-gray-600">
+                            <p><strong>Required Fields:</strong></p>
+                            <ul class="list-disc list-inside ml-4 space-y-1">
+                                <li><code class="bg-gray-100 px-1 rounded">company_name</code> - Your registered company name</li>
+                                <li><code class="bg-gray-100 px-1 rounded">trading_name</code> - Your public-facing brand name</li>
+                                <li><code class="bg-gray-100 px-1 rounded">contact_email</code> - Technical contact email</li>
+                            </ul>
+                            <p class="mt-3"><strong>Optional Fields:</strong></p>
+                            <ul class="list-disc list-inside ml-4 space-y-1">
+                                <li><code class="bg-gray-100 px-1 rounded">company_number</code> - UK Companies House number</li>
+                                <li><code class="bg-gray-100 px-1 rounded">webhook_url</code> - Your webhook endpoint for real-time notifications</li>
+                                <li><code class="bg-gray-100 px-1 rounded">uk_gambling_license</code> - Not required for pension providers</li>
+                            </ul>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-lg p-6">
-                        <h5 class="font-semibold mb-3 text-gray-800">Step 3: Enable Pension Payments</h5>
-                        <p class="text-gray-700 mb-3">Once activated, users can connect their pension accounts and make contributions through Opendeck:</p>
-                        <ul class="list-disc list-inside text-gray-700 mb-3 space-y-1 text-sm">
-                            <li>Users link their pension accounts via <code class="bg-gray-100 px-1 rounded">POST /api/pensions/accounts</code></li>
-                            <li>Users make contributions via <code class="bg-gray-100 px-1 rounded">POST /api/pensions/pay</code></li>
-                            <li>You receive payments and can track them via the Merchant Dashboard</li>
-                        </ul>
+                    <!-- Step 2: Activation -->
+                    <div class="bg-white rounded-lg p-6 mb-4 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 text-sm">2</span>
+                            <h5 class="font-bold text-lg text-gray-800">Account Activation & Verification</h5>
+                        </div>
+                        <p class="text-gray-700 mb-4">After registration, your account starts with <code class="bg-gray-100 px-1 rounded">pending</code> status. Opendeck performs compliance verification before activation.</p>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-sm font-semibold text-gray-800 mb-2">Verification Process:</p>
+                            <ol class="list-decimal list-inside space-y-2 text-sm text-gray-700">
+                                <li><strong>Company Verification:</strong> We verify your company registration with Companies House (UK)</li>
+                                <li><strong>Compliance Review:</strong> Review of pension provider regulations and FCA requirements</li>
+                                <li><strong>Security Assessment:</strong> Validation of your webhook endpoint and security practices</li>
+                                <li><strong>API Testing:</strong> We may request test API calls to verify integration readiness</li>
+                            </ol>
+                        </div>
+
+                        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-3 rounded">
+                            <p class="text-sm text-blue-800 mb-2"><strong>Check Activation Status:</strong></p>
+                            <pre class="bg-gray-900 text-blue-400 p-3 rounded text-xs overflow-x-auto mb-2"><code>GET https://api.opendeck.co.uk/api/gaming/operators/me
+Headers:
+  X-API-Key: opdk_live_YOUR_API_KEY</code></pre>
+                            <p class="text-xs text-blue-700">Status values: <code class="bg-blue-100 px-1 rounded">pending</code> → <code class="bg-blue-100 px-1 rounded">active</code></p>
+                        </div>
+
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                            <p class="text-sm text-yellow-800"><strong>⏱️ Typical Timeline:</strong> 1-2 business days for standard verification. Complex cases may take up to 5 business days. You'll receive email notifications at each stage.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Provider Connection -->
+                    <div class="bg-white rounded-lg p-6 mb-4 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 text-sm">3</span>
+                            <h5 class="font-bold text-lg text-gray-800">Establish Secure Connection</h5>
+                        </div>
+                        <p class="text-gray-700 mb-4">Once activated, establish a secure connection between Opendeck and your pension provider system. This enables real-time account verification and payment processing.</p>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-sm font-semibold text-gray-800 mb-3">Connection Methods:</p>
+                            
+                            <div class="mb-4">
+                                <p class="text-sm font-medium text-gray-700 mb-2">Option A: API Token Exchange (Recommended)</p>
+                                <p class="text-xs text-gray-600 mb-2">Exchange secure tokens for authenticated API access:</p>
+                                <pre class="bg-gray-900 text-green-400 p-3 rounded text-xs overflow-x-auto"><code>POST https://api.opendeck.co.uk/api/pensions/providers/connect
+Headers:
+  X-API-Key: opdk_live_YOUR_API_KEY
+  Content-Type: application/json
+
+Body:
+{
+  "provider_token": "your_secure_provider_token",
+  "provider_api_endpoint": "https://api.yourpension.com/v1",
+  "encryption_key": "base64_encoded_public_key"
+}</code></pre>
+                            </div>
+
+                            <div>
+                                <p class="text-sm font-medium text-gray-700 mb-2">Option B: OAuth 2.0 Integration</p>
+                                <p class="text-xs text-gray-600 mb-2">For providers with OAuth support:</p>
+                                <pre class="bg-gray-900 text-green-400 p-3 rounded text-xs overflow-x-auto"><code>POST https://api.opendeck.co.uk/api/pensions/providers/oauth/authorize
+Headers:
+  X-API-Key: opdk_live_YOUR_API_KEY
+
+Body:
+{
+  "oauth_client_id": "your_client_id",
+  "oauth_client_secret": "your_client_secret",
+  "redirect_uri": "https://api.opendeck.co.uk/api/pensions/providers/oauth/callback"
+}</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 border-l-4 border-green-400 p-4 rounded">
+                            <p class="text-sm text-green-800"><strong>✅ Connection Verified:</strong> Once connected, Opendeck can:</p>
+                            <ul class="list-disc list-inside ml-4 mt-2 text-xs text-green-700 space-y-1">
+                                <li>Verify pension account details in real-time</li>
+                                <li>Process contribution payments securely</li>
+                                <li>Sync account balances and transaction history</li>
+                                <li>Send webhook notifications for payment events</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: User Account Connection -->
+                    <div class="bg-white rounded-lg p-6 mb-4 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 text-sm">4</span>
+                            <h5 class="font-bold text-lg text-gray-800">User Account Connection Flow</h5>
+                        </div>
+                        <p class="text-gray-700 mb-4">When users connect their pension accounts, Opendeck securely verifies and links them to your provider system.</p>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-sm font-semibold text-gray-800 mb-3">Connection Flow:</p>
+                            <div class="space-y-3 text-sm">
+                                <div class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 flex-shrink-0">1</span>
+                                    <div>
+                                        <p class="font-medium text-gray-800">User Initiates Connection</p>
+                                        <p class="text-xs text-gray-600">User provides pension account details via Opendeck app/web</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 flex-shrink-0">2</span>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Opendeck Validates Account</p>
+                                        <p class="text-xs text-gray-600">Opendeck calls your API to verify account exists and is valid</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 flex-shrink-0">3</span>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Secure Token Exchange</p>
+                                        <p class="text-xs text-gray-600">Provider returns encrypted access token for future API calls</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold mr-3 flex-shrink-0">4</span>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Account Linked</p>
+                                        <p class="text-xs text-gray-600">User can now make contributions through Opendeck</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
+                            <p class="text-sm text-blue-800 mb-2"><strong>Provider API Endpoint (Your Side):</strong></p>
+                            <pre class="bg-gray-900 text-blue-400 p-3 rounded text-xs overflow-x-auto"><code>POST https://api.yourpension.com/v1/accounts/verify
+Headers:
+  Authorization: Bearer YOUR_PROVIDER_TOKEN
+  X-Opendeck-Signature: HMAC_SIGNATURE
+
+Body:
+{
+  "account_number": "PEN123456",
+  "scheme_name": "Workplace Pension Scheme",
+  "user_national_insurance": "AB123456C"
+}
+
+Response:
+{
+  "valid": true,
+  "account_id": "ACC789",
+  "account_name": "John Smith",
+  "current_balance": 50000.00,
+  "currency": "GBP"
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Payment Processing -->
+                    <div class="bg-white rounded-lg p-6 mb-4 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 text-sm">5</span>
+                            <h5 class="font-bold text-lg text-gray-800">Payment Processing & Webhooks</h5>
+                        </div>
+                        <p class="text-gray-700 mb-4">When users make pension contributions, Opendeck processes payments and notifies your system via webhooks.</p>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-sm font-semibold text-gray-800 mb-3">Payment Flow:</p>
+                            <ol class="list-decimal list-inside space-y-2 text-sm text-gray-700">
+                                <li>User initiates contribution via Opendeck (e.g., £100)</li>
+                                <li>Opendeck processes payment via Open Banking or wallet</li>
+                                <li>Opendeck sends webhook to your provider API</li>
+                                <li>Your system confirms receipt and updates pension account</li>
+                                <li>Opendeck updates payment status to <code class="bg-gray-100 px-1 rounded">completed</code></li>
+                            </ol>
+                        </div>
+
+                        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-3 rounded">
+                            <p class="text-sm text-blue-800 mb-2"><strong>Webhook Payload Example:</strong></p>
+                            <pre class="bg-gray-900 text-blue-400 p-3 rounded text-xs overflow-x-auto mb-2"><code>POST https://api.yourpension.com/webhooks/opendeck
+Headers:
+  X-Opendeck-Event: pension.payment.completed
+  X-Opendeck-Signature: HMAC_SHA256_SIGNATURE
+  X-Opendeck-Timestamp: 1703123456
+
+Body:
+{
+  "event_id": "evt_abc123",
+  "event_type": "pension.payment.completed",
+  "created_at": "2024-01-15T10:30:00Z",
+  "data": {
+    "payment_id": "pay_xyz789",
+    "pension_account_id": "acc_456",
+    "user_id": "usr_123",
+    "amount": 100.00,
+    "currency": "GBP",
+    "tax_relief_amount": 25.00,
+    "gross_amount": 125.00,
+    "payment_source": "bank_account",
+    "provider_payment_id": "PEN-2024-001234"
+  }
+}</code></pre>
+                            <p class="text-xs text-blue-700 mt-2"><strong>Security:</strong> Always verify the <code class="bg-blue-100 px-1 rounded">X-Opendeck-Signature</code> header using HMAC SHA256 with your webhook secret.</p>
+                        </div>
+
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                            <p class="text-sm text-yellow-800"><strong>Webhook Events:</strong></p>
+                            <ul class="list-disc list-inside ml-4 mt-2 text-xs text-yellow-700 space-y-1">
+                                <li><code class="bg-yellow-100 px-1 rounded">pension.payment.completed</code> - Payment successfully processed</li>
+                                <li><code class="bg-yellow-100 px-1 rounded">pension.payment.failed</code> - Payment failed</li>
+                                <li><code class="bg-yellow-100 px-1 rounded">pension.account.connected</code> - User connected their account</li>
+                                <li><code class="bg-yellow-100 px-1 rounded">pension.account.disconnected</code> - User disconnected their account</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Security & Best Practices -->
+                    <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-lg p-6 mb-4 shadow-sm border-2 border-red-300">
+                        <div class="flex items-center mb-4">
+                            <svg class="h-6 w-6 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                            <h5 class="font-bold text-lg text-gray-800">Security & Best Practices</h5>
+                        </div>
+                        
+                        <div class="space-y-3 text-sm">
+                            <div class="bg-white rounded p-3 border border-red-200">
+                                <p class="font-semibold text-gray-800 mb-2">🔐 API Key Security</p>
+                                <ul class="list-disc list-inside ml-4 text-gray-700 space-y-1 text-xs">
+                                    <li>Never commit API keys to version control</li>
+                                    <li>Rotate keys immediately if compromised</li>
+                                    <li>Use environment variables for key storage</li>
+                                    <li>Implement IP whitelisting for production</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white rounded p-3 border border-red-200">
+                                <p class="font-semibold text-gray-800 mb-2">🔒 Webhook Security</p>
+                                <ul class="list-disc list-inside ml-4 text-gray-700 space-y-1 text-xs">
+                                    <li>Always verify HMAC signatures</li>
+                                    <li>Check timestamp to prevent replay attacks</li>
+                                    <li>Use HTTPS for all webhook endpoints</li>
+                                    <li>Implement idempotency for payment processing</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-white rounded p-3 border border-red-200">
+                                <p class="font-semibold text-gray-800 mb-2">📋 Compliance</p>
+                                <ul class="list-disc list-inside ml-4 text-gray-700 space-y-1 text-xs">
+                                    <li>PSD2 compliance for payment processing</li>
+                                    <li>GDPR compliance for user data handling</li>
+                                    <li>FCA regulations for pension providers</li>
+                                    <li>Audit logging for all transactions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testing & Support -->
+                    <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                        <h5 class="font-bold text-lg text-gray-800 mb-4">Testing & Support</h5>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <p class="font-semibold text-gray-800 mb-2 text-sm">🧪 Sandbox Environment</p>
+                                <p class="text-xs text-gray-600 mb-2">Test your integration in our sandbox:</p>
+                                <code class="text-xs bg-gray-200 px-2 py-1 rounded">https://sandbox-api.opendeck.co.uk</code>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <p class="font-semibold text-gray-800 mb-2 text-sm">📚 API Documentation</p>
+                                <p class="text-xs text-gray-600 mb-2">Full API reference:</p>
+                                <a href="https://api.opendeck.co.uk/api/docs" target="_blank" class="text-xs text-blue-600 hover:underline">View Swagger Docs →</a>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <p class="font-semibold text-gray-800 mb-2 text-sm">💬 Support</p>
+                                <p class="text-xs text-gray-600 mb-2">Need help? Contact our integration team:</p>
+                                <a href="mailto:integrations@opendeck.co.uk" class="text-xs text-blue-600 hover:underline">integrations@opendeck.co.uk</a>
+                            </div>
+                            
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <p class="font-semibold text-gray-800 mb-2 text-sm">📊 Merchant Dashboard</p>
+                                <p class="text-xs text-gray-600 mb-2">Monitor payments and transactions:</p>
+                                <a href="signin.html" class="text-xs text-blue-600 hover:underline">Access Dashboard →</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
