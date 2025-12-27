@@ -234,12 +234,12 @@
             width: 100%;
         }
         
-        /* Products Dropdown */
-        .products-dropdown {
+        /* Dropdown Navigation */
+        .nav-dropdown {
             position: relative;
         }
         
-        .products-trigger {
+        .dropdown-trigger {
             position: relative;
             color: #4b5563;
             font-weight: 500;
@@ -250,11 +250,11 @@
             gap: 0.25rem;
         }
         
-        .products-trigger:hover {
+        .dropdown-trigger:hover {
             color: #0052FF;
         }
         
-        .products-trigger::after {
+        .dropdown-trigger::after {
             content: '';
             position: absolute;
             width: 0;
@@ -265,15 +265,15 @@
             transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .products-trigger:hover::after {
+        .dropdown-trigger:hover::after {
             width: 100%;
         }
         
-        .products-trigger.active {
+        .dropdown-trigger.active {
             color: #0052FF;
         }
         
-        .products-trigger.active::after {
+        .dropdown-trigger.active::after {
             width: 100%;
         }
         
@@ -298,6 +298,11 @@
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
+        }
+        
+        .dropdown-menu.right {
+            left: auto;
+            right: 0;
         }
         
         .dropdown-item {
@@ -369,10 +374,10 @@
                     </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-10">
-                    <div class="products-dropdown">
-                        <div class="products-trigger text-sm" id="products-trigger">
+                    <div class="nav-dropdown">
+                        <div class="dropdown-trigger text-sm" data-dropdown="products">
                             Products
-                            <svg class="h-4 w-4 ml-1 transition-transform duration-200" id="products-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="h-4 w-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                             </svg>
                         </div>
@@ -399,10 +404,110 @@
                             </a>
                         </div>
                     </div>
-                    <a href="#solutions" class="nav-link text-sm">Solutions</a>
-                    <a href="#features" class="nav-link text-sm">Features</a>
-                    <a href="developers.html" class="nav-link text-sm">Developers</a>
-                    <a href="#about" class="nav-link text-sm">About</a>
+                    <div class="nav-dropdown">
+                        <div class="dropdown-trigger text-sm" data-dropdown="solutions">
+                            Solutions
+                            <svg class="h-4 w-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                        <div class="dropdown-menu" id="solutions-dropdown">
+                            <a href="#solutions" class="dropdown-item">
+                                <div class="dropdown-item-title">Enterprise & Government</div>
+                                <div class="dropdown-item-desc">Enterprise-grade infrastructure for scale</div>
+                            </a>
+                            <a href="#solutions" class="dropdown-item">
+                                <div class="dropdown-item-title">Business & Individual</div>
+                                <div class="dropdown-item-desc">Simple solutions for growing businesses</div>
+                            </a>
+                            <a href="developers.html" class="dropdown-item">
+                                <div class="dropdown-item-title">API Integration</div>
+                                <div class="dropdown-item-desc">Comprehensive developer tools</div>
+                            </a>
+                            <a href="#contact" class="dropdown-item">
+                                <div class="dropdown-item-title">Custom Solutions</div>
+                                <div class="dropdown-item-desc">Tailored solutions for your needs</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <div class="dropdown-trigger text-sm" data-dropdown="features">
+                            Features
+                            <svg class="h-4 w-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                        <div class="dropdown-menu" id="features-dropdown">
+                            <a href="#features" class="dropdown-item">
+                                <div class="dropdown-item-title">Lightning Fast</div>
+                                <div class="dropdown-item-desc">Sub-100ms latency processing</div>
+                            </a>
+                            <a href="#features" class="dropdown-item">
+                                <div class="dropdown-item-title">Bank-Grade Security</div>
+                                <div class="dropdown-item-desc">Enterprise-level encryption</div>
+                            </a>
+                            <a href="#features" class="dropdown-item">
+                                <div class="dropdown-item-title">ML-Powered</div>
+                                <div class="dropdown-item-desc">Intelligent affordability checks</div>
+                            </a>
+                            <a href="#features" class="dropdown-item">
+                                <div class="dropdown-item-title">Easy Integration</div>
+                                <div class="dropdown-item-desc">Simple REST API & SDKs</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <div class="dropdown-trigger text-sm" data-dropdown="developers">
+                            Developers
+                            <svg class="h-4 w-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                        <div class="dropdown-menu right" id="developers-dropdown">
+                            <a href="developers.html" class="dropdown-item">
+                                <div class="dropdown-item-title">API Documentation</div>
+                                <div class="dropdown-item-desc">Complete API reference</div>
+                            </a>
+                            <a href="developers.html#quick-start" class="dropdown-item">
+                                <div class="dropdown-item-title">Quick Start</div>
+                                <div class="dropdown-item-desc">Get started in minutes</div>
+                            </a>
+                            <a href="developers.html#code-examples" class="dropdown-item">
+                                <div class="dropdown-item-title">Code Examples</div>
+                                <div class="dropdown-item-desc">JavaScript, Python, cURL</div>
+                            </a>
+                            <a href="developers.html#api-docs" class="dropdown-item">
+                                <div class="dropdown-item-title">Interactive Docs</div>
+                                <div class="dropdown-item-desc">Swagger & ReDoc</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="nav-dropdown">
+                        <div class="dropdown-trigger text-sm" data-dropdown="about">
+                            About
+                            <svg class="h-4 w-4 ml-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                        <div class="dropdown-menu right" id="about-dropdown">
+                            <a href="#about" class="dropdown-item">
+                                <div class="dropdown-item-title">Our Story</div>
+                                <div class="dropdown-item-desc">Building the future of payments</div>
+                            </a>
+                            <a href="#about" class="dropdown-item">
+                                <div class="dropdown-item-title">Mission</div>
+                                <div class="dropdown-item-desc">Making finance accessible</div>
+                            </a>
+                            <a href="#contact" class="dropdown-item">
+                                <div class="dropdown-item-title">Careers</div>
+                                <div class="dropdown-item-desc">Join our team</div>
+                            </a>
+                            <a href="#contact" class="dropdown-item">
+                                <div class="dropdown-item-title">Contact</div>
+                                <div class="dropdown-item-desc">Get in touch</div>
+                            </a>
+                        </div>
+                    </div>
                     <a href="signin.html" class="nav-link text-sm">Sign In</a>
                     <a href="#contact" class="btn-primary text-sm">Contact Us</a>
                 </div>
@@ -419,13 +524,13 @@
         <div id="mobile-menu" class="hidden md:hidden glass border-t">
             <div class="px-6 py-4 space-y-4">
                 <div>
-                    <button id="mobile-products-trigger" class="w-full flex items-center justify-between text-gray-700 hover:text-opendeck-500 font-medium">
+                    <button class="mobile-dropdown-trigger w-full flex items-center justify-between text-gray-700 hover:text-opendeck-500 font-medium" data-mobile-dropdown="products">
                         Products
-                        <svg class="h-4 w-4 transition-transform duration-200" id="mobile-products-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="h-4 w-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
-                    <div id="mobile-products-dropdown" class="hidden pl-4 pt-2 space-y-2">
+                    <div class="mobile-dropdown hidden pl-4 pt-2 space-y-2" data-mobile-dropdown="products">
                         <a href="#solutions" class="block text-gray-600 hover:text-opendeck-500 text-sm">Gaming & Gambling</a>
                         <a href="developers.html#pension-providers" class="block text-gray-600 hover:text-opendeck-500 text-sm">Pension Payments</a>
                         <a href="developers.html#utility-providers" class="block text-gray-600 hover:text-opendeck-500 text-sm">Utility Payments</a>
@@ -433,10 +538,62 @@
                         <a href="developers.html" class="block text-gray-600 hover:text-opendeck-500 text-sm">Open Banking</a>
                     </div>
                 </div>
-                <a href="#solutions" class="block text-gray-700 hover:text-opendeck-500 font-medium">Solutions</a>
-                <a href="#features" class="block text-gray-700 hover:text-opendeck-500 font-medium">Features</a>
-                <a href="developers.html" class="block text-gray-700 hover:text-opendeck-500 font-medium">Developers</a>
-                <a href="#about" class="block text-gray-700 hover:text-opendeck-500 font-medium">About</a>
+                <div>
+                    <button class="mobile-dropdown-trigger w-full flex items-center justify-between text-gray-700 hover:text-opendeck-500 font-medium" data-mobile-dropdown="solutions">
+                        Solutions
+                        <svg class="h-4 w-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="mobile-dropdown hidden pl-4 pt-2 space-y-2" data-mobile-dropdown="solutions">
+                        <a href="#solutions" class="block text-gray-600 hover:text-opendeck-500 text-sm">Enterprise & Government</a>
+                        <a href="#solutions" class="block text-gray-600 hover:text-opendeck-500 text-sm">Business & Individual</a>
+                        <a href="developers.html" class="block text-gray-600 hover:text-opendeck-500 text-sm">API Integration</a>
+                        <a href="#contact" class="block text-gray-600 hover:text-opendeck-500 text-sm">Custom Solutions</a>
+                    </div>
+                </div>
+                <div>
+                    <button class="mobile-dropdown-trigger w-full flex items-center justify-between text-gray-700 hover:text-opendeck-500 font-medium" data-mobile-dropdown="features">
+                        Features
+                        <svg class="h-4 w-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="mobile-dropdown hidden pl-4 pt-2 space-y-2" data-mobile-dropdown="features">
+                        <a href="#features" class="block text-gray-600 hover:text-opendeck-500 text-sm">Lightning Fast</a>
+                        <a href="#features" class="block text-gray-600 hover:text-opendeck-500 text-sm">Bank-Grade Security</a>
+                        <a href="#features" class="block text-gray-600 hover:text-opendeck-500 text-sm">ML-Powered</a>
+                        <a href="#features" class="block text-gray-600 hover:text-opendeck-500 text-sm">Easy Integration</a>
+                    </div>
+                </div>
+                <div>
+                    <button class="mobile-dropdown-trigger w-full flex items-center justify-between text-gray-700 hover:text-opendeck-500 font-medium" data-mobile-dropdown="developers">
+                        Developers
+                        <svg class="h-4 w-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="mobile-dropdown hidden pl-4 pt-2 space-y-2" data-mobile-dropdown="developers">
+                        <a href="developers.html" class="block text-gray-600 hover:text-opendeck-500 text-sm">API Documentation</a>
+                        <a href="developers.html#quick-start" class="block text-gray-600 hover:text-opendeck-500 text-sm">Quick Start</a>
+                        <a href="developers.html#code-examples" class="block text-gray-600 hover:text-opendeck-500 text-sm">Code Examples</a>
+                        <a href="developers.html#api-docs" class="block text-gray-600 hover:text-opendeck-500 text-sm">Interactive Docs</a>
+                    </div>
+                </div>
+                <div>
+                    <button class="mobile-dropdown-trigger w-full flex items-center justify-between text-gray-700 hover:text-opendeck-500 font-medium" data-mobile-dropdown="about">
+                        About
+                        <svg class="h-4 w-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="mobile-dropdown hidden pl-4 pt-2 space-y-2" data-mobile-dropdown="about">
+                        <a href="#about" class="block text-gray-600 hover:text-opendeck-500 text-sm">Our Story</a>
+                        <a href="#about" class="block text-gray-600 hover:text-opendeck-500 text-sm">Mission</a>
+                        <a href="#contact" class="block text-gray-600 hover:text-opendeck-500 text-sm">Careers</a>
+                        <a href="#contact" class="block text-gray-600 hover:text-opendeck-500 text-sm">Contact</a>
+                    </div>
+                </div>
                 <a href="signin.html" class="block text-gray-700 hover:text-opendeck-500 font-medium">Sign In</a>
                 <a href="#contact" class="block btn-primary text-center">Contact Us</a>
             </div>
@@ -684,62 +841,91 @@
 
     <!-- JavaScript -->
     <script>
-        // Products Dropdown
-        const productsTrigger = document.getElementById('products-trigger');
-        const productsDropdown = document.getElementById('products-dropdown');
-        const productsArrow = document.getElementById('products-arrow');
-        
-        if (productsTrigger && productsDropdown) {
-            productsTrigger.addEventListener('click', (e) => {
-                e.preventDefault();
-                const isOpen = productsDropdown.classList.contains('show');
-                
-                if (isOpen) {
-                    productsDropdown.classList.remove('show');
-                    productsTrigger.classList.remove('active');
-                    productsArrow.style.transform = 'rotate(0deg)';
-                } else {
-                    // Close any other open dropdowns
+        // Desktop Dropdowns - Generic handler for all dropdowns
+        document.querySelectorAll('.dropdown-trigger').forEach(trigger => {
+            const dropdownId = trigger.getAttribute('data-dropdown');
+            const dropdown = document.getElementById(`${dropdownId}-dropdown`);
+            const arrow = trigger.querySelector('svg');
+            
+            if (dropdown) {
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const isOpen = dropdown.classList.contains('show');
+                    
+                    // Close all other dropdowns
                     document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
-                        if (menu !== productsDropdown) {
+                        if (menu !== dropdown) {
                             menu.classList.remove('show');
                         }
                     });
+                    document.querySelectorAll('.dropdown-trigger.active').forEach(trig => {
+                        if (trig !== trigger) {
+                            trig.classList.remove('active');
+                            const trigArrow = trig.querySelector('svg');
+                            if (trigArrow) trigArrow.style.transform = 'rotate(0deg)';
+                        }
+                    });
                     
-                    productsDropdown.classList.add('show');
-                    productsTrigger.classList.add('active');
-                    productsArrow.style.transform = 'rotate(180deg)';
-                }
-            });
+                    if (isOpen) {
+                        dropdown.classList.remove('show');
+                        trigger.classList.remove('active');
+                        if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    } else {
+                        dropdown.classList.add('show');
+                        trigger.classList.add('active');
+                        if (arrow) arrow.style.transform = 'rotate(180deg)';
+                    }
+                });
+            }
+        });
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-dropdown')) {
+                document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+                document.querySelectorAll('.dropdown-trigger.active').forEach(trigger => {
+                    trigger.classList.remove('active');
+                    const arrow = trigger.querySelector('svg');
+                    if (arrow) arrow.style.transform = 'rotate(0deg)';
+                });
+            }
+        });
+        
+        // Mobile Dropdowns - Generic handler
+        document.querySelectorAll('.mobile-dropdown-trigger').forEach(trigger => {
+            const dropdownId = trigger.getAttribute('data-mobile-dropdown');
+            const dropdown = document.querySelector(`.mobile-dropdown[data-mobile-dropdown="${dropdownId}"]`);
+            const arrow = trigger.querySelector('svg');
             
-            // Close dropdown when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!productsTrigger.contains(e.target) && !productsDropdown.contains(e.target)) {
-                    productsDropdown.classList.remove('show');
-                    productsTrigger.classList.remove('active');
-                    productsArrow.style.transform = 'rotate(0deg)';
-                }
-            });
-        }
-        
-        // Mobile Products Dropdown
-        const mobileProductsTrigger = document.getElementById('mobile-products-trigger');
-        const mobileProductsDropdown = document.getElementById('mobile-products-dropdown');
-        const mobileProductsArrow = document.getElementById('mobile-products-arrow');
-        
-        if (mobileProductsTrigger && mobileProductsDropdown) {
-            mobileProductsTrigger.addEventListener('click', () => {
-                const isOpen = !mobileProductsDropdown.classList.contains('hidden');
-                
-                if (isOpen) {
-                    mobileProductsDropdown.classList.add('hidden');
-                    mobileProductsArrow.style.transform = 'rotate(0deg)';
-                } else {
-                    mobileProductsDropdown.classList.remove('hidden');
-                    mobileProductsArrow.style.transform = 'rotate(180deg)';
-                }
-            });
-        }
+            if (dropdown) {
+                trigger.addEventListener('click', () => {
+                    const isOpen = !dropdown.classList.contains('hidden');
+                    
+                    if (isOpen) {
+                        dropdown.classList.add('hidden');
+                        if (arrow) arrow.style.transform = 'rotate(0deg)';
+                    } else {
+                        // Close other mobile dropdowns
+                        document.querySelectorAll('.mobile-dropdown:not(.hidden)').forEach(menu => {
+                            if (menu !== dropdown) {
+                                menu.classList.add('hidden');
+                            }
+                        });
+                        document.querySelectorAll('.mobile-dropdown-trigger').forEach(trig => {
+                            if (trig !== trigger) {
+                                const trigArrow = trig.querySelector('svg');
+                                if (trigArrow) trigArrow.style.transform = 'rotate(0deg)';
+                            }
+                        });
+                        
+                        dropdown.classList.remove('hidden');
+                        if (arrow) arrow.style.transform = 'rotate(180deg)';
+                    }
+                });
+            }
+        });
         
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
