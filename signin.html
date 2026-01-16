@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign in to Opendeck Sandbox - Access the Opendeck sandbox environment with your test credentials">
+    <title>Sign In - Opendeck Sandbox</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'opendeck': {
+                            '50': '#f0f5ff',
+                            '100': '#e0ebff',
+                            '200': '#c7d9ff',
+                            '300': '#a4bfff',
+                            '400': '#8199ff',
+                            '500': '#0052FF',
+                            '600': '#0047e6',
+                            '700': '#0038b8',
+                            '800': '#002d91',
+                            '900': '#002675',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #f0f5ff 0%, #ffffff 100%);
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .premium-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0052FF 0%, #0038b8 100%);
+            color: white;
+            font-weight: 600;
+            padding: 14px 32px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 14px 0 rgba(0, 82, 255, 0.39);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px 0 rgba(0, 82, 255, 0.5);
+        }
+        
+        .input-field {
+            transition: all 0.2s;
+        }
+        
+        .input-field:focus {
+            box-shadow: 0 0 0 3px rgba(0, 82, 255, 0.1);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .btn-primary:disabled:hover {
+            transform: none;
+            box-shadow: 0 4px 14px 0 rgba(0, 82, 255, 0.39);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="glass fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center space-x-3">
+                        <img class="h-9 w-auto" src="Opendeck/opendeck final.png" alt="Opendeck Logo">
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="index.html#solutions" class="text-sm text-gray-700 hover:text-opendeck-500 font-medium transition-colors">Solutions</a>
+                    <a href="index.html#features" class="text-sm text-gray-700 hover:text-opendeck-500 font-medium transition-colors">Features</a>
+                    <a href="developers.html" class="text-sm text-gray-700 hover:text-opendeck-500 font-medium transition-colors">Developers</a>
+                    <a href="index.html#about" class="text-sm text-gray-700 hover:text-opendeck-500 font-medium transition-colors">About</a>
+                    <a href="signin.html" class="text-sm text-opendeck-500 font-medium">Sign In</a>
+                    <a href="index.html#contact" class="btn-primary text-sm">Contact Us</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="p-2 text-gray-700">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass border-t">
+            <div class="px-6 py-4 space-y-4">
+                <a href="index.html#solutions" class="block text-gray-700 hover:text-opendeck-500 font-medium">Solutions</a>
+                <a href="index.html#features" class="block text-gray-700 hover:text-opendeck-500 font-medium">Features</a>
+                <a href="developers.html" class="block text-gray-700 hover:text-opendeck-500 font-medium">Developers</a>
+                <a href="index.html#about" class="block text-gray-700 hover:text-opendeck-500 font-medium">About</a>
+                <a href="signin.html" class="block text-opendeck-500 font-medium">Sign In</a>
+                <a href="index.html#contact" class="block btn-primary text-center">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sign In Section -->
+    <section class="min-h-screen flex items-center justify-center pt-32 pb-20 px-4">
+        <div class="max-w-md w-full">
+            <div class="premium-card p-10">
+                <div class="text-center mb-8">
+                    <a href="index.html" class="inline-block mb-6">
+                        <img class="h-12 w-auto mx-auto" src="Opendeck/opendeck final.png" alt="Opendeck Logo">
+                    </a>
+                    <h2 class="text-3xl font-bold mb-2 tracking-tight">Sign In to Sandbox</h2>
+                    <p class="text-gray-600">Access the Opendeck sandbox environment with your test credentials</p>
+                </div>
+
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-opendeck-500 p-4 rounded-lg mb-6">
+                    <p class="text-sm text-gray-700">
+                        <strong class="text-opendeck-600">Sandbox Access:</strong> Use the test API key or authentication token provided to you. If you don't have credentials, please <a href="index.html#contact" class="text-opendeck-500 hover:underline font-semibold">contact us</a>.
+                    </p>
+                </div>
+
+                <form id="signin-form-element" class="space-y-6">
+                    <div>
+                        <label for="signin-email" class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                        <input type="email" id="signin-email" name="email" required
+                            class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-opendeck-500 focus:outline-none transition-all"
+                            placeholder="test@example.com">
+                    </div>
+                    <div>
+                        <label for="signin-api-key" class="block text-sm font-semibold text-gray-700 mb-2">API Key or Token</label>
+                        <input type="password" id="signin-api-key" name="apiKey" required
+                            class="input-field w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-opendeck-500 focus:outline-none transition-all"
+                            placeholder="opdk_live_... or your test token">
+                        <p class="mt-2 text-xs text-gray-500">Enter your test API key (starts with opdk_live_) or authentication token</p>
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember-me" name="remember"
+                            class="h-4 w-4 text-opendeck-500 focus:ring-opendeck-500 border-gray-300 rounded">
+                        <label for="remember-me" class="ml-2 block text-sm text-gray-600 font-medium">
+                            Remember me
+                        </label>
+                    </div>
+                    <button type="submit" id="signin-submit-btn" class="w-full btn-primary">
+                        Sign In to Sandbox
+                    </button>
+                </form>
+                <div id="signin-message" class="hidden p-4 rounded-xl text-sm mt-4"></div>
+                
+                <div class="text-center pt-6 border-t border-gray-200 mt-6">
+                    <p class="text-sm text-gray-600 mb-2">
+                        Need test credentials? <a href="index.html#contact" class="text-opendeck-500 hover:underline font-semibold">Contact us</a>
+                    </p>
+                    <p class="text-sm text-gray-500">
+                        <a href="index.html" class="hover:text-opendeck-500 transition-colors">← Back to Home</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <img src="Opendeck/opendeck iconw.png" alt="Opendeck Logo" class="h-10 w-auto mb-6">
+                    <p class="text-gray-400 max-w-md mb-4 leading-relaxed">Building the infrastructure for open-finance on top of payments. Empowering businesses and individuals with next-generation financial solutions.</p>
+                    <p class="text-gray-500 text-sm">PSD2 compliant • Bank-grade security</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Company</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html#about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
+                        <li><a href="index.html#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="developers.html" class="text-gray-400 hover:text-white transition-colors">Documentation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Contact</h3>
+                    <ul class="space-y-3">
+                        <li class="text-gray-400">
+                            <a href="mailto:info@opendeck.co.uk" class="hover:text-white transition-colors">info@opendeck.co.uk</a>
+                        </li>
+                        <li class="text-gray-400">+44 7841590622</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-500">
+                <p>&copy; 2024 Opendeck. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn?.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // API Configuration - Auto-detect environment
+        function getApiBaseUrl() {
+            // Check if we're in production (opendeck.co.uk domain)
+            if (window.location.hostname === 'opendeck.co.uk' || window.location.hostname === 'www.opendeck.co.uk') {
+                return 'https://api.opendeck.co.uk/api';
+            }
+            // Development/staging
+            return window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? 'http://localhost:8000/api'
+                : `https://api.opendeck.co.uk/api`;
+        }
+        
+        const API_BASE_URL = getApiBaseUrl();
+
+        // Utility function to show messages
+        function showMessage(elementId, message, isSuccess = true) {
+            const messageElement = document.getElementById(elementId);
+            if (!messageElement) return;
+            
+            messageElement.textContent = message;
+            messageElement.classList.remove('hidden');
+            messageElement.className = isSuccess 
+                ? 'p-4 rounded-xl text-sm bg-green-50 text-green-800 border border-green-200' 
+                : 'p-4 rounded-xl text-sm bg-red-50 text-red-800 border border-red-200';
+            
+            setTimeout(() => {
+                messageElement.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Set loading state
+        function setLoading(isLoading) {
+            const submitBtn = document.getElementById('signin-submit-btn');
+            if (submitBtn) {
+                submitBtn.disabled = isLoading;
+                if (isLoading) {
+                    submitBtn.textContent = 'Signing in...';
+                } else {
+                    submitBtn.textContent = 'Sign In to Sandbox';
+                }
+            }
+        }
+
+        // Sign In Form Handler - Wait for DOM to be ready
+        window.addEventListener('DOMContentLoaded', () => {
+            const signinFormElement = document.getElementById('signin-form-element');
+            if (signinFormElement) {
+                signinFormElement.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const email = document.getElementById('signin-email')?.value || '';
+                    const apiKey = document.getElementById('signin-api-key')?.value || '';
+                    const rememberMe = document.getElementById('remember-me')?.checked || false;
+                    
+                    if (!apiKey || apiKey.trim().length === 0) {
+                        showMessage('signin-message', 'Please enter your API key or authentication token.', false);
+                        return;
+                    }
+                    
+                    setLoading(true);
+                    
+                    try {
+                        // Determine endpoint and headers based on API key type
+                        const isMerchantKey = apiKey.startsWith('opdk_live_');
+                        const testEndpoint = isMerchantKey
+                            ? `${API_BASE_URL}/merchant/dashboard/overview?period=day`
+                            : `${API_BASE_URL}/auth/me`;
+                        
+                        console.log('Attempting authentication to:', testEndpoint);
+                        
+                        // Set headers based on key type
+                        const headers = {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        };
+                        
+                        if (isMerchantKey) {
+                            // Merchant API keys use X-API-Key header
+                            headers['X-API-Key'] = apiKey.trim();
+                        } else {
+                            // JWT tokens use Authorization Bearer header
+                            headers['Authorization'] = `Bearer ${apiKey.trim()}`;
+                        }
+                        
+                        const response = await fetch(testEndpoint, {
+                            method: 'GET',
+                            headers: headers,
+                            credentials: 'omit' // Don't send cookies
+                        });
+                        
+                        console.log('Response status:', response.status);
+                        
+                        if (response.ok) {
+                            showMessage('signin-message', 'Authentication successful! Redirecting to sandbox...', true);
+                            
+                            // Store credentials
+                            localStorage.setItem('opendeck_api_key', apiKey.trim());
+                            localStorage.setItem('opendeck_email', email);
+                            
+                            if (rememberMe) {
+                                localStorage.setItem('opendeck_remember', 'true');
+                            }
+                            
+                            // Determine redirect URL
+                            let redirectUrl;
+                            if (apiKey.startsWith('opdk_live_')) {
+                                // Check if merchant dashboard exists at relative path
+                                redirectUrl = window.location.origin + '/merchant-dashboard';
+                            } else {
+                                redirectUrl = window.location.origin + '/dashboard';
+                            }
+                            
+                            console.log('Redirecting to:', redirectUrl);
+                            
+                            setTimeout(() => {
+                                window.location.href = redirectUrl;
+                            }, 1500);
+                        } else {
+                            // Try to get error message from response
+                            let errorMessage = 'Invalid API key or token. Please check your credentials.';
+                            
+                            try {
+                                const errorData = await response.json();
+                                errorMessage = errorData.detail || errorData.message || errorData.error || errorMessage;
+                            } catch (parseError) {
+                                // If response is not JSON, use status text
+                                if (response.status === 401) {
+                                    errorMessage = 'Invalid API key or token. Please check your credentials.';
+                                } else if (response.status === 403) {
+                                    errorMessage = 'Access forbidden. Your account may not be activated.';
+                                } else if (response.status === 404) {
+                                    errorMessage = 'Endpoint not found. Please contact support.';
+                                } else if (response.status >= 500) {
+                                    errorMessage = 'Server error. Please try again later.';
+                                } else {
+                                    errorMessage = `Authentication failed (${response.status}). Please check your credentials.`;
+                                }
+                            }
+                            
+                            showMessage('signin-message', errorMessage, false);
+                            setLoading(false);
+                        }
+                    } catch (error) {
+                        console.error('Signin error:', error);
+                        
+                        let errorMessage = 'Network error. Please check your connection and try again.';
+                        
+                        if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                            errorMessage = 'Unable to connect to the server. Please check your internet connection or contact support if the problem persists.';
+                        } else if (error.message) {
+                            errorMessage = `Error: ${error.message}`;
+                        }
+                        
+                        showMessage('signin-message', errorMessage, false);
+                        setLoading(false);
+                    }
+                });
+            }
+        });
+
+        // Check if user is already logged in
+        window.addEventListener('DOMContentLoaded', () => {
+            const apiKey = localStorage.getItem('opendeck_api_key');
+            if (apiKey) {
+                let redirectUrl;
+                if (apiKey.startsWith('opdk_live_')) {
+                    redirectUrl = window.location.origin + '/merchant-dashboard';
+                } else {
+                    redirectUrl = window.location.origin + '/dashboard';
+                }
+                
+                // Only redirect if we're not already on a dashboard page
+                if (!window.location.pathname.includes('dashboard') && !window.location.pathname.includes('merchant-dashboard')) {
+                    console.log('Already logged in, redirecting to:', redirectUrl);
+                    window.location.href = redirectUrl;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
