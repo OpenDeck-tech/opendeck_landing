@@ -1179,6 +1179,319 @@ Body:
                         </div>
                     </div>
 
+                    <!-- Step 6: Integration Implementation Guide -->
+                    <div class="bg-white rounded-lg p-6 mb-4 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 text-sm">6</span>
+                            <h5 class="font-bold text-lg text-gray-800">Integration Implementation Guide</h5>
+                        </div>
+                        <p class="text-gray-700 mb-4">Step-by-step guide to implement Opendeck pension integration in your system.</p>
+                        
+                        <!-- Quick Start -->
+                        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-4 rounded">
+                            <p class="text-sm font-semibold text-blue-800 mb-2">🚀 Quick Start Checklist</p>
+                            <ol class="list-decimal list-inside space-y-1 text-xs text-blue-700">
+                                <li>Register your pension provider organization (Step 1)</li>
+                                <li>Wait for account activation (Step 2)</li>
+                                <li>Establish secure connection (Step 3)</li>
+                                <li>Implement account verification endpoint (Step 4)</li>
+                                <li>Set up webhook handler for payments (Step 5)</li>
+                                <li>Test in sandbox environment</li>
+                                <li>Go live in production</li>
+                            </ol>
+                        </div>
+
+                        <!-- Implementation: Account Verification -->
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-sm font-semibold text-gray-800 mb-3">1. Implement Account Verification Endpoint</p>
+                            <p class="text-xs text-gray-600 mb-3">When users connect their pension accounts, Opendeck will call your API to verify account details.</p>
+                            
+                            <div class="mb-3">
+                                <p class="text-xs font-medium text-gray-700 mb-1">Required Endpoint:</p>
+                                <pre class="bg-gray-900 text-green-400 p-3 rounded text-xs overflow-x-auto"><code>POST https://api.yourpension.com/v1/accounts/verify
+Headers:
+  Authorization: Bearer YOUR_PROVIDER_TOKEN
+  X-Opendeck-Signature: HMAC_SHA256_SIGNATURE
+  X-Opendeck-Timestamp: 1703123456
+  Content-Type: application/json
+
+Request Body:
+{
+  "account_number": "PEN123456",
+  "scheme_name": "Workplace Pension Scheme",
+  "user_national_insurance": "AB123456C",
+  "user_email": "user@example.com"
+}
+
+Success Response (200 OK):
+{
+  "valid": true,
+  "account_id": "ACC789",
+  "account_name": "John Smith",
+  "current_balance": 50000.00,
+  "currency": "GBP",
+  "scheme_name": "Workplace Pension Scheme",
+  "provider_account_id": "PROV-ACC-123",
+  "tax_relief_applicable": true,
+  "tax_relief_rate": 20.0,
+  "contribution_rate": 5.0,
+  "employer_contribution_rate": 3.0
+}
+
+Error Response (400 Bad Request):
+{
+  "valid": false,
+  "error": "Account not found",
+  "error_code": "ACCOUNT_NOT_FOUND"
+}</code></pre>
+                            </div>
+
+                            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded mb-3">
+                                <p class="text-xs text-yellow-800"><strong>Security:</strong> Always verify the <code class="bg-yellow-100 px-1 rounded">X-Opendeck-Signature</code> header. The signature is computed as:</p>
+                                <pre class="bg-gray-900 text-yellow-400 p-2 rounded text-xs mt-2 overflow-x-auto"><code>HMAC_SHA256(
+  timestamp + request_body,
+  your_webhook_secret
+)</code></pre>
+                            </div>
+
+                            <div class="bg-white rounded p-3 border border-gray-200">
+                                <p class="text-xs font-medium text-gray-700 mb-2">Python Example Implementation:</p>
+                                <pre class="bg-gray-900 text-blue-400 p-3 rounded text-xs overflow-x-auto"><code>from flask import Flask, request, jsonify
+import hmac
+import hashlib
+import time
+
+app = Flask(__name__)
+WEBHOOK_SECRET = "your_webhook_secret"
+
+def verify_signature(signature, timestamp, body):
+    expected = hmac.new(
+        WEBHOOK_SECRET.encode(),
+        (timestamp + body).encode(),
+        hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(signature, expected)
+
+@app.route('/v1/accounts/verify', methods=['POST'])
+def verify_account():
+    # Verify signature
+    signature = request.headers.get('X-Opendeck-Signature')
+    timestamp = request.headers.get('X-Opendeck-Timestamp')
+    
+    if not verify_signature(signature, timestamp, request.data):
+        return jsonify({"error": "Invalid signature"}), 401
+    
+    # Check timestamp (prevent replay attacks)
+    if abs(time.time() - int(timestamp)) > 300:  # 5 minutes
+        return jsonify({"error": "Request expired"}), 401
+    
+    data = request.json
+    account_number = data.get('account_number')
+    ni_number = data.get('user_national_insurance')
+    
+    # Verify account in your system
+    account = verify_account_in_system(account_number, ni_number)
+    
+    if account:
+        return jsonify({
+            "valid": True,
+            "account_id": account.id,
+            "account_name": account.name,
+            "current_balance": float(account.balance),
+            "currency": "GBP",
+            "scheme_name": account.scheme_name,
+            "tax_relief_applicable": True,
+            "tax_relief_rate": 20.0
+        }), 200
+    else:
+        return jsonify({
+            "valid": False,
+            "error": "Account not found"
+        }), 400</code></pre>
+                            </div>
+                        </div>
+
+                        <!-- Implementation: Webhook Handler -->
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-sm font-semibold text-gray-800 mb-3">2. Implement Webhook Handler for Payments</p>
+                            <p class="text-xs text-gray-600 mb-3">Opendeck will send webhook notifications when payments are processed. Your system must handle these events.</p>
+                            
+                            <div class="mb-3">
+                                <p class="text-xs font-medium text-gray-700 mb-1">Webhook Endpoint (Your Side):</p>
+                                <pre class="bg-gray-900 text-green-400 p-3 rounded text-xs overflow-x-auto"><code>POST https://api.yourpension.com/webhooks/opendeck
+Headers:
+  X-Opendeck-Event: pension.payment.completed
+  X-Opendeck-Signature: HMAC_SHA256_SIGNATURE
+  X-Opendeck-Timestamp: 1703123456
+  Content-Type: application/json
+
+Webhook Payload:
+{
+  "event_id": "evt_abc123",
+  "event_type": "pension.payment.completed",
+  "created_at": "2024-01-15T10:30:00Z",
+  "data": {
+    "payment_id": "pay_xyz789",
+    "pension_account_id": "acc_456",
+    "user_id": "usr_123",
+    "amount": 100.00,
+    "currency": "GBP",
+    "tax_relief_amount": 25.00,
+    "gross_amount": 125.00,
+    "payment_source": "bank_account",
+    "provider_payment_id": "PEN-2024-001234"
+  }
+}
+
+Expected Response (200 OK):
+{
+  "received": true,
+  "processed": true
+}</code></pre>
+                            </div>
+
+                            <div class="bg-white rounded p-3 border border-gray-200 mb-3">
+                                <p class="text-xs font-medium text-gray-700 mb-2">Python Webhook Handler Example:</p>
+                                <pre class="bg-gray-900 text-blue-400 p-3 rounded text-xs overflow-x-auto"><code>from flask import Flask, request, jsonify
+import hmac
+import hashlib
+import time
+
+app = Flask(__name__)
+WEBHOOK_SECRET = "your_webhook_secret"
+
+@app.route('/webhooks/opendeck', methods=['POST'])
+def handle_opendeck_webhook():
+    # Verify signature
+    signature = request.headers.get('X-Opendeck-Signature')
+    timestamp = request.headers.get('X-Opendeck-Timestamp')
+    event_type = request.headers.get('X-Opendeck-Event')
+    
+    if not verify_signature(signature, timestamp, request.data):
+        return jsonify({"error": "Invalid signature"}), 401
+    
+    data = request.json
+    event_type = data.get('event_type')
+    event_data = data.get('data')
+    
+    # Handle different event types
+    if event_type == 'pension.payment.completed':
+        # Process payment
+        payment_id = event_data.get('payment_id')
+        amount = event_data.get('amount')
+        account_id = event_data.get('pension_account_id')
+        
+        # Update pension account in your system
+        result = process_pension_contribution(
+            account_id=account_id,
+            amount=amount,
+            payment_id=payment_id
+        )
+        
+        if result:
+            return jsonify({"received": True, "processed": True}), 200
+        else:
+            return jsonify({"received": True, "processed": False}), 500
+            
+    elif event_type == 'pension.payment.failed':
+        # Log failed payment
+        log_failed_payment(event_data)
+        return jsonify({"received": True}), 200
+        
+    elif event_type == 'pension.account.connected':
+        # Handle account connection
+        handle_account_connection(event_data)
+        return jsonify({"received": True}), 200
+    
+    return jsonify({"received": True}), 200</code></pre>
+                            </div>
+
+                            <div class="bg-purple-50 border-l-4 border-purple-400 p-3 rounded">
+                                <p class="text-xs text-purple-800"><strong>⚠️ Important:</strong> Always implement idempotency. Use the <code class="bg-purple-100 px-1 rounded">event_id</code> to prevent processing the same event twice. Store processed event IDs and check before processing.</p>
+                            </div>
+                        </div>
+
+                        <!-- Implementation: Testing -->
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-sm font-semibold text-gray-800 mb-3">3. Testing Your Integration</p>
+                            
+                            <div class="space-y-3">
+                                <div class="bg-white rounded p-3 border border-gray-200">
+                                    <p class="text-xs font-medium text-gray-700 mb-2">Test Account Verification:</p>
+                                    <pre class="bg-gray-900 text-green-400 p-2 rounded text-xs overflow-x-auto"><code># Use Opendeck sandbox to test account verification
+curl -X POST https://sandbox-api.opendeck.co.uk/api/pensions/providers/verify-account \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "account_number": "TEST123",
+    "scheme_name": "Test Scheme",
+    "user_national_insurance": "AB123456C",
+    "provider": "nest"
+  }'</code></pre>
+                                </div>
+
+                                <div class="bg-white rounded p-3 border border-gray-200">
+                                    <p class="text-xs font-medium text-gray-700 mb-2">Test Payment Processing:</p>
+                                    <pre class="bg-gray-900 text-green-400 p-2 rounded text-xs overflow-x-auto"><code># Create a test payment
+curl -X POST https://sandbox-api.opendeck.co.uk/api/pensions/pay \
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "pension_account_id": "test-account-id",
+    "amount": 100.00,
+    "currency": "GBP",
+    "payment_source": "bank_account"
+  }'</code></pre>
+                                </div>
+
+                                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded">
+                                    <p class="text-xs text-yellow-800"><strong>Testing Webhooks:</strong> Use a tool like <a href="https://webhook.site" target="_blank" class="underline">webhook.site</a> or <a href="https://ngrok.com" target="_blank" class="underline">ngrok</a> to expose your local webhook endpoint for testing.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Common Integration Patterns -->
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-sm font-semibold text-gray-800 mb-3">4. Common Integration Patterns</p>
+                            
+                            <div class="space-y-3">
+                                <div class="bg-white rounded p-3 border border-gray-200">
+                                    <p class="text-xs font-medium text-gray-700 mb-2">Pattern: Batch Processing</p>
+                                    <p class="text-xs text-gray-600 mb-2">For high-volume providers, implement batch processing of webhooks:</p>
+                                    <pre class="bg-gray-900 text-blue-400 p-2 rounded text-xs overflow-x-auto"><code># Queue webhook events for batch processing
+def handle_webhook(event):
+    # Add to processing queue
+    queue.enqueue(process_pension_payment, event.data)
+    
+    # Return immediately
+    return {"received": True}, 200
+
+# Process in background worker
+def process_pension_payment(payment_data):
+    # Batch process multiple payments
+    payments = get_pending_payments()
+    update_pension_accounts_batch(payments)</code></pre>
+                                </div>
+
+                                <div class="bg-white rounded p-3 border border-gray-200">
+                                    <p class="text-xs font-medium text-gray-700 mb-2">Pattern: Retry Logic</p>
+                                    <p class="text-xs text-gray-600 mb-2">Implement retry logic for failed webhook processing:</p>
+                                    <pre class="bg-gray-900 text-blue-400 p-2 rounded text-xs overflow-x-auto"><code>def process_webhook_with_retry(event_data, max_retries=3):
+    for attempt in range(max_retries):
+        try:
+            result = process_payment(event_data)
+            return result
+        except Exception as e:
+            if attempt == max_retries - 1:
+                # Log to error tracking system
+                log_error(e, event_data)
+                raise
+            time.sleep(2 ** attempt)  # Exponential backoff</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Testing & Support -->
                     <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
                         <h5 class="font-bold text-lg text-gray-800 mb-4">Testing & Support</h5>
