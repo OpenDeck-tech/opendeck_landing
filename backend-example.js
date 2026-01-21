@@ -1,6 +1,19 @@
 // Backend API for Opendeck Authentication
 // PostgreSQL implementation with bcrypt password hashing
 
+// Suppress specific deprecation warning for _headers (temporary fix until dependencies are updated)
+// This warning comes from Express's 'send' package using deprecated res._headers
+// The proper fix is to update Express: npm update express
+process.on('warning', (warning) => {
+    if (warning.name === 'DeprecationWarning' && 
+        (warning.message.includes('_headers') || warning.code === 'DEP0066')) {
+        // Suppress only the _headers deprecation warning (DEP0066)
+        return;
+    }
+    // Show all other warnings
+    console.warn(warning.name, warning.message);
+});
+
 const express = require('express');
 const { Pool } = require('pg');
 const bcrypt = require('bcryptjs');
