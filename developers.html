@@ -280,6 +280,18 @@
             transform: translateY(0);
         }
         
+        /* Ensure target sections are visible when navigated to via hash */
+        .doc-section:target.animate-on-scroll {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* For sections that contain animated children */
+        .doc-section:target .animate-on-scroll {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         @media (max-width: 1024px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -1945,6 +1957,47 @@ Response:
             observer.observe(element);
         });
 
+        // Handle hash navigation on page load
+        function handleHashNavigation() {
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                const targetElement = document.getElementById(hash);
+                
+                if (targetElement) {
+                    // Make sure the element is visible immediately
+                    targetElement.classList.add('visible');
+                    
+                    // Scroll to the element with offset for fixed header
+                    setTimeout(() => {
+                        const headerOffset = 100;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }, 100);
+                    
+                    // Update active sidebar link
+                    const sidebarLink = document.querySelector(`.sidebar-link[href="#${hash}"]`);
+                    if (sidebarLink) {
+                        setActive(sidebarLink);
+                    }
+                }
+            }
+        }
+
+        // Run on page load
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', handleHashNavigation);
+        } else {
+            handleHashNavigation();
+        }
+
+        // Also handle hash changes (when clicking links on the same page)
+        window.addEventListener('hashchange', handleHashNavigation);
+
         // Sidebar toggle function
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
@@ -1958,13 +2011,52 @@ Response:
                 link.classList.remove('active');
             });
             // Add active class to clicked link
-            element.classList.add('active');
+            if (element) {
+                element.classList.add('active');
+            }
             
             // Close sidebar on mobile after click
             if (window.innerWidth < 1024) {
                 toggleSidebar();
             }
         }
+
+        // Handle anchor link clicks with smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href && href !== '#') {
+                    const targetId = href.substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        e.preventDefault();
+                        
+                        // Make sure the element is visible
+                        targetElement.classList.add('visible');
+                        
+                        // Scroll to the element
+                        const headerOffset = 100;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update URL without triggering scroll
+                        history.pushState(null, null, href);
+                        
+                        // Update active sidebar link
+                        const sidebarLink = document.querySelector(`.sidebar-link[href="${href}"]`);
+                        if (sidebarLink) {
+                            setActive(sidebarLink);
+                        }
+                    }
+                }
+            });
+        });
 
         // Update active link on scroll
         window.addEventListener('scroll', () => {
