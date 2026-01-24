@@ -19,6 +19,7 @@ const { Pool } = require('pg');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -26,6 +27,14 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Serve static files (HTML, CSS, images, etc.)
+app.use(express.static(path.join(__dirname)));
+
+// Favicon route - serve the existing icon as favicon.ico
+app.get('/favicon.ico', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Opendeck', 'opendeck iconw.png'));
+});
 
 // PostgreSQL Connection
 const pool = new Pool({
