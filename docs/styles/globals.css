@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap');
+
+@import 'highlight.js/styles/github-dark.css';
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  @apply bg-matte-black text-white;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* MDX Content Styles */
+.mdx-content {
+  @apply max-w-4xl mx-auto px-6 py-12;
+}
+
+.mdx-content h1 {
+  @apply text-4xl font-bold mb-6 text-white;
+}
+
+.mdx-content h2 {
+  @apply text-3xl font-bold mt-12 mb-6 text-white border-b border-matte-border pb-3;
+}
+
+.mdx-content h3 {
+  @apply text-2xl font-bold mt-8 mb-4 text-white;
+}
+
+.mdx-content h4 {
+  @apply text-xl font-semibold mt-6 mb-3 text-white;
+}
+
+.mdx-content p {
+  @apply text-gray-300 mb-4 leading-relaxed;
+}
+
+.mdx-content ul,
+.mdx-content ol {
+  @apply text-gray-300 mb-4 ml-6 space-y-2;
+}
+
+.mdx-content li {
+  @apply leading-relaxed;
+}
+
+.mdx-content code {
+  @apply bg-matte-dark text-white px-2 py-1 rounded text-sm font-mono border border-matte-border;
+}
+
+.mdx-content pre {
+  @apply bg-matte-dark border border-matte-border rounded-lg p-4 overflow-x-auto;
+}
+
+.mdx-content pre code {
+  @apply bg-transparent border-0 p-0;
+}
+
+.mdx-content blockquote {
+  @apply border-l-4 border-matte-border pl-4 italic text-gray-400 my-6;
+}
+
+.mdx-content table {
+  @apply w-full border-collapse my-6;
+}
+
+.mdx-content th,
+.mdx-content td {
+  @apply border border-matte-border px-4 py-2 text-left;
+}
+
+.mdx-content th {
+  @apply bg-matte-dark font-semibold text-white;
+}
+
+.mdx-content a {
+  @apply text-white underline hover:text-gray-300 transition-colors;
+}
