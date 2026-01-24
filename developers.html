@@ -831,41 +831,371 @@ accounts = requests.get(
             <div id="operator-setup" class="doc-section animate-on-scroll">
                 <h3 class="text-2xl font-bold mb-6">Setting Up as an Operator</h3>
                 <div id="gaming-operators" class="bg-blue-50 rounded-xl p-8 mb-6">
-                    <h4 class="text-xl font-semibold mb-4 text-gray-800">For Gaming & Gambling Operators</h4>
-                    <p class="text-gray-700 mb-4">Gaming operators, casinos, sportsbooks, and esports platforms can integrate with Opendeck to process payments.</p>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-blue-100 rounded-lg p-3 mr-4">
+                            <svg class="h-8 w-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold mb-1 text-gray-800">For Gaming & Gambling Operators</h4>
+                            <p class="text-gray-600 text-sm">Online casinos, sportsbooks, esports platforms, fantasy sports, and skill-based gaming</p>
+                        </div>
+                    </div>
                     
-                    <div class="bg-white rounded-lg p-6 mb-4">
-                        <h5 class="font-semibold mb-3 text-gray-800">Step 1: Register Your Operator Account</h5>
-                        <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-3"><code>POST /api/gaming/operators
+                    <p class="text-gray-700 mb-6">Gaming operators, casinos, sportsbooks, and esports platforms can integrate with Opendeck to process payments with ML-powered affordability checks, real-time transaction processing, and comprehensive player account management.</p>
+
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded">
+                        <p class="text-sm text-yellow-800"><strong>🔒 Security First:</strong> All connections are encrypted, authenticated, and comply with PSD2, UK Gambling Commission regulations, and GDPR. Your API credentials are hashed and never stored in plain text.</p>
+                    </div>
+
+                    <!-- Step 1: Registration -->
+                    <div class="bg-white rounded-lg p-6 mb-4 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 text-sm">1</span>
+                            <h5 class="font-bold text-lg text-gray-800">Register as a Gaming Operator</h5>
+                        </div>
+                        <p class="text-gray-700 mb-4">Start by registering your gaming operator organization with Opendeck. This creates your operator account and generates secure API credentials.</p>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-xs text-gray-600 mb-2 font-semibold uppercase tracking-wide">API Endpoint</p>
+                            <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-3"><code>POST https://api.opendeck.co.uk/api/gaming/operators
 Content-Type: application/json
 
 {
-  "company_name": "Your Company Ltd",
-  "trading_name": "Your Trading Name",
-  "contact_email": "contact@example.com",
+  "company_name": "Gaming Operator Ltd",
+  "trading_name": "Your Casino Brand",
+  "contact_email": "api@yourcasino.com",
   "contact_phone": "+44 20 1234 5678",
   "company_number": "12345678",
   "uk_gambling_license": "LIC123456",
-  "website_url": "https://yourwebsite.com",
-  "webhook_url": "https://yourwebsite.com/webhooks"
+  "website_url": "https://www.yourcasino.com",
+  "webhook_url": "https://api.yourcasino.com/webhooks/opendeck"
 }</code></pre>
-                        <p class="text-sm text-gray-600">Response includes your <code class="bg-gray-100 px-1 rounded">api_key</code> and <code class="bg-gray-100 px-1 rounded">api_secret</code>. <strong>Save these immediately - they won't be shown again!</strong></p>
-                    </div>
+                        </div>
 
-                    <div class="bg-white rounded-lg p-6 mb-4">
-                        <h5 class="font-semibold mb-3 text-gray-800">Step 2: Account Activation</h5>
-                        <p class="text-gray-700 mb-3">After registration, your operator account starts with <code class="bg-gray-100 px-1 rounded">pending</code> status. Opendeck will review and activate your account.</p>
-                        <p class="text-gray-700 mb-3">Once activated, you can use your API key to access the Merchant Dashboard and process transactions.</p>
-                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-3">
-                            <p class="text-sm text-yellow-800"><strong>Note:</strong> Activation typically takes 1-2 business days for compliance review. You'll receive an email notification when your account is activated.</p>
+                        <div class="bg-blue-50 rounded-lg p-4 mb-3">
+                            <p class="text-sm text-blue-800 mb-2"><strong>Response:</strong> You'll receive your API credentials immediately:</p>
+                            <pre class="bg-gray-900 text-blue-400 p-3 rounded text-xs overflow-x-auto"><code>{
+  "operator_id": "550e8400-e29b-41d4-a716-446655440000",
+  "api_key": "opdk_live_abc123...",
+  "api_secret": "opdk_secret_xyz789..."
+}</code></pre>
+                            <p class="text-xs text-red-600 mt-2 font-semibold">⚠️ CRITICAL: Save these credentials immediately! They are only shown once and cannot be recovered.</p>
+                        </div>
+
+                        <div class="mt-4 space-y-2 text-sm text-gray-600">
+                            <p><strong>Required Fields:</strong></p>
+                            <ul class="list-disc list-inside ml-4 space-y-1">
+                                <li><code class="bg-gray-100 px-1 rounded">company_name</code> - Your registered company name</li>
+                                <li><code class="bg-gray-100 px-1 rounded">trading_name</code> - Your public-facing brand name</li>
+                                <li><code class="bg-gray-100 px-1 rounded">contact_email</code> - Technical contact email</li>
+                                <li><code class="bg-gray-100 px-1 rounded">contact_phone</code> - Contact phone number</li>
+                            </ul>
+                            <p class="mt-3"><strong>Optional Fields:</strong></p>
+                            <ul class="list-disc list-inside ml-4 space-y-1">
+                                <li><code class="bg-gray-100 px-1 rounded">company_number</code> - UK Companies House number</li>
+                                <li><code class="bg-gray-100 px-1 rounded">uk_gambling_license</code> - UK Gambling Commission license number (required for UK operators)</li>
+                                <li><code class="bg-gray-100 px-1 rounded">website_url</code> - Your public website URL</li>
+                                <li><code class="bg-gray-100 px-1 rounded">webhook_url</code> - Your webhook endpoint for real-time notifications</li>
+                            </ul>
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-lg p-6">
-                        <h5 class="font-semibold mb-3 text-gray-800">Step 3: Start Using the API</h5>
-                        <p class="text-gray-700 mb-3">Once activated, use your API key in the <code class="bg-gray-100 px-1 rounded">X-API-Key</code> header:</p>
-                        <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm"><code>curl -X GET https://api.opendeck.co.uk/api/merchant/dashboard/overview \
-  -H "X-API-Key: opdk_live_YOUR_API_KEY_HERE"</code></pre>
+                    <!-- Step 2: Account Activation -->
+                    <div class="bg-white rounded-lg p-6 mb-4 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 text-sm">2</span>
+                            <h5 class="font-bold text-lg text-gray-800">Account Activation & Verification</h5>
+                        </div>
+                        <p class="text-gray-700 mb-4">After registration, your operator account starts with <code class="bg-gray-100 px-1 rounded">pending</code> status. Opendeck will review your application for compliance and activate your account.</p>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-xs text-gray-600 mb-2 font-semibold uppercase tracking-wide">Check Account Status</p>
+                            <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-3"><code>GET https://api.opendeck.co.uk/api/gaming/operators/me
+X-API-Key: opdk_live_YOUR_API_KEY_HERE</code></pre>
+                        </div>
+
+                        <div class="bg-blue-50 rounded-lg p-4 mb-3">
+                            <p class="text-sm text-blue-800 mb-2"><strong>Response:</strong></p>
+                            <pre class="bg-gray-900 text-blue-400 p-3 rounded text-xs overflow-x-auto"><code>{
+  "operator_id": "550e8400-e29b-41d4-a716-446655440000",
+  "company_name": "Gaming Operator Ltd",
+  "trading_name": "Your Casino Brand",
+  "status": "pending",
+  "created_at": "2024-01-15T10:30:00Z"
+}</code></pre>
+                        </div>
+
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-3 rounded">
+                            <p class="text-sm text-yellow-800"><strong>Activation Status:</strong> Check your account status by calling <code class="bg-yellow-100 px-1 rounded">GET /api/gaming/operators/me</code> with your API key. Status will change from <code class="bg-yellow-100 px-1 rounded">pending</code> to <code class="bg-yellow-100 px-1 rounded">active</code> when approved. Activation typically takes 1-2 business days for compliance review. You'll receive an email notification when your account is activated.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Player Account Management -->
+                    <div class="bg-white rounded-lg p-6 mb-4 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 text-sm">3</span>
+                            <h5 class="font-bold text-lg text-gray-800">Create Player Accounts</h5>
+                        </div>
+                        <p class="text-gray-700 mb-4">Before processing transactions, create player accounts for your users. Each player account is linked to your operator and can have multiple payment methods.</p>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-xs text-gray-600 mb-2 font-semibold uppercase tracking-wide">Create Player Account</p>
+                            <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-3"><code>POST https://api.opendeck.co.uk/api/gaming/players
+X-API-Key: opdk_live_YOUR_API_KEY_HERE
+Content-Type: application/json
+
+{
+  "operator_id": "550e8400-e29b-41d4-a716-446655440000",
+  "player_id": "player_12345",
+  "email": "player@example.com",
+  "first_name": "John",
+  "last_name": "Doe",
+  "date_of_birth": "1990-01-15",
+  "country": "GB"
+}</code></pre>
+                        </div>
+
+                        <div class="bg-blue-50 rounded-lg p-4 mb-3">
+                            <p class="text-sm text-blue-800 mb-2"><strong>Response:</strong></p>
+                            <pre class="bg-gray-900 text-blue-400 p-3 rounded text-xs overflow-x-auto"><code>{
+  "player_id": "player_12345",
+  "operator_id": "550e8400-e29b-41d4-a716-446655440000",
+  "email": "player@example.com",
+  "status": "active",
+  "created_at": "2024-01-15T10:30:00Z"
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Process Transactions -->
+                    <div class="bg-white rounded-lg p-6 mb-4 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 text-sm">4</span>
+                            <h5 class="font-bold text-lg text-gray-800">Process Deposits & Withdrawals</h5>
+                        </div>
+                        <p class="text-gray-700 mb-4">Process player deposits and withdrawals with automatic affordability checks. All transactions are processed securely with real-time status updates.</p>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-xs text-gray-600 mb-2 font-semibold uppercase tracking-wide">Create Deposit Transaction</p>
+                            <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-3"><code>POST https://api.opendeck.co.uk/api/gaming/transactions
+X-API-Key: opdk_live_YOUR_API_KEY_HERE
+Content-Type: application/json
+
+{
+  "operator_id": "550e8400-e29b-41d4-a716-446655440000",
+  "player_id": "player_12345",
+  "type": "deposit",
+  "amount": 100.00,
+  "currency": "GBP",
+  "operator_transaction_id": "CASINO-TXN-12345"
+}</code></pre>
+                        </div>
+
+                        <div class="bg-blue-50 rounded-lg p-4 mb-3">
+                            <p class="text-sm text-blue-800 mb-2"><strong>Response:</strong></p>
+                            <pre class="bg-gray-900 text-blue-400 p-3 rounded text-xs overflow-x-auto"><code>{
+  "transaction_id": "txn_abc123",
+  "operator_transaction_id": "CASINO-TXN-12345",
+  "player_id": "player_12345",
+  "type": "deposit",
+  "amount": 100.00,
+  "currency": "GBP",
+  "status": "pending",
+  "affordability_check": {
+    "status": "approved",
+    "risk_score": 0.15,
+    "recommendation": "proceed"
+  },
+  "created_at": "2024-01-15T10:30:00Z"
+}</code></pre>
+                        </div>
+
+                        <div class="mt-4 space-y-2 text-sm text-gray-600">
+                            <p><strong>Transaction Types:</strong></p>
+                            <ul class="list-disc list-inside ml-4 space-y-1">
+                                <li><code class="bg-gray-100 px-1 rounded">deposit</code> - Player deposits funds to their account</li>
+                                <li><code class="bg-gray-100 px-1 rounded">withdrawal</code> - Player withdraws funds from their account</li>
+                                <li><code class="bg-gray-100 px-1 rounded">refund</code> - Refund a previous transaction</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Affordability Checks -->
+                    <div class="bg-white rounded-lg p-6 mb-4 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 text-sm">5</span>
+                            <h5 class="font-bold text-lg text-gray-800">ML-Powered Affordability Checks</h5>
+                        </div>
+                        <p class="text-gray-700 mb-4">Opendeck automatically performs ML-powered affordability checks on all transactions to ensure responsible gambling and compliance with UK Gambling Commission regulations.</p>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-xs text-gray-600 mb-2 font-semibold uppercase tracking-wide">Request Affordability Check</p>
+                            <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-3"><code>POST https://api.opendeck.co.uk/api/gaming/affordability/check
+X-API-Key: opdk_live_YOUR_API_KEY_HERE
+Content-Type: application/json
+
+{
+  "player_id": "player_12345",
+  "amount": 500.00,
+  "currency": "GBP",
+  "transaction_type": "deposit"
+}</code></pre>
+                        </div>
+
+                        <div class="bg-blue-50 rounded-lg p-4 mb-3">
+                            <p class="text-sm text-blue-800 mb-2"><strong>Response:</strong></p>
+                            <pre class="bg-gray-900 text-blue-400 p-3 rounded text-xs overflow-x-auto"><code>{
+  "affordability_status": "approved",
+  "risk_score": 0.12,
+  "recommendation": "proceed",
+  "factors": {
+    "income_verification": "verified",
+    "spending_pattern": "normal",
+    "deposit_frequency": "moderate"
+  },
+  "warnings": []
+}</code></pre>
+                        </div>
+
+                        <div class="mt-4 space-y-2 text-sm text-gray-600">
+                            <p><strong>Affordability Status Values:</strong></p>
+                            <ul class="list-disc list-inside ml-4 space-y-1">
+                                <li><code class="bg-green-100 px-1 rounded text-green-800">approved</code> - Transaction is safe to proceed</li>
+                                <li><code class="bg-yellow-100 px-1 rounded text-yellow-800">warning</code> - Proceed with caution, review recommended</li>
+                                <li><code class="bg-red-100 px-1 rounded text-red-800">rejected</code> - Transaction should be declined</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Webhooks -->
+                    <div class="bg-white rounded-lg p-6 mb-4 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 text-sm">6</span>
+                            <h5 class="font-bold text-lg text-gray-800">Webhook Integration</h5>
+                        </div>
+                        <p class="text-gray-700 mb-4">Receive real-time notifications about transaction status changes, player account updates, and affordability check results via webhooks.</p>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-xs text-gray-600 mb-2 font-semibold uppercase tracking-wide">Webhook Events</p>
+                            <ul class="text-sm text-gray-700 space-y-2">
+                                <li><code class="bg-gray-100 px-1 rounded">transaction.status_changed</code> - Transaction status updated</li>
+                                <li><code class="bg-gray-100 px-1 rounded">transaction.completed</code> - Transaction completed successfully</li>
+                                <li><code class="bg-gray-100 px-1 rounded">transaction.failed</code> - Transaction failed</li>
+                                <li><code class="bg-gray-100 px-1 rounded">affordability.check_completed</code> - Affordability check completed</li>
+                                <li><code class="bg-gray-100 px-1 rounded">player.account_created</code> - New player account created</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-xs text-gray-600 mb-2 font-semibold uppercase tracking-wide">Webhook Payload Example</p>
+                            <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-3"><code>POST https://api.yourcasino.com/webhooks/opendeck
+Content-Type: application/json
+X-Webhook-Signature: sha256=abc123...
+
+{
+  "event": "transaction.status_changed",
+  "timestamp": "2024-01-15T10:30:00Z",
+  "data": {
+    "transaction_id": "txn_abc123",
+    "operator_transaction_id": "CASINO-TXN-12345",
+    "status": "completed",
+    "amount": 100.00,
+    "currency": "GBP"
+  }
+}</code></pre>
+                        </div>
+
+                        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-3 rounded">
+                            <p class="text-sm text-blue-800"><strong>Security:</strong> All webhooks are signed with HMAC SHA-256. Verify the signature using your API secret to ensure the webhook is from Opendeck.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 7: Dashboard & Analytics -->
+                    <div class="bg-white rounded-lg p-6 mb-4 shadow-sm border border-gray-200">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold mr-3 text-sm">7</span>
+                            <h5 class="font-bold text-lg text-gray-800">Access Merchant Dashboard</h5>
+                        </div>
+                        <p class="text-gray-700 mb-4">Access your merchant dashboard to view transaction analytics, player statistics, and account overview.</p>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <p class="text-xs text-gray-600 mb-2 font-semibold uppercase tracking-wide">Dashboard Overview</p>
+                            <pre class="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-sm mb-3"><code>GET https://api.opendeck.co.uk/api/merchant/dashboard/overview?period=day
+X-API-Key: opdk_live_YOUR_API_KEY_HERE</code></pre>
+                        </div>
+
+                        <div class="bg-blue-50 rounded-lg p-4 mb-3">
+                            <p class="text-sm text-blue-800 mb-2"><strong>Response:</strong></p>
+                            <pre class="bg-gray-900 text-blue-400 p-3 rounded text-xs overflow-x-auto"><code>{
+  "period": "day",
+  "total_transactions": 1250,
+  "total_volume": 125000.00,
+  "successful_transactions": 1180,
+  "failed_transactions": 70,
+  "average_transaction_value": 100.00,
+  "top_players": [...]
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Best Practices -->
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
+                        <h5 class="font-bold text-lg text-gray-800 mb-4">Best Practices & Compliance</h5>
+                        <ul class="space-y-3 text-sm text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="h-5 w-5 text-blue-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Always verify affordability checks</strong> before processing large deposits to ensure responsible gambling compliance</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-5 w-5 text-blue-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Store API credentials securely</strong> - Never commit them to version control or expose them in client-side code</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-5 w-5 text-blue-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Implement webhook signature verification</strong> to ensure webhooks are authentic and from Opendeck</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-5 w-5 text-blue-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Use idempotency keys</strong> for transaction requests to prevent duplicate processing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-5 w-5 text-blue-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Monitor transaction status</strong> and handle failed transactions appropriately with retry logic</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-5 w-5 text-blue-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span><strong>Comply with UK Gambling Commission</strong> regulations including age verification, self-exclusion, and responsible gambling measures</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Support -->
+                    <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                        <h5 class="font-bold text-lg text-gray-800 mb-3">Need Help?</h5>
+                        <p class="text-gray-700 mb-4">For technical support, API questions, or compliance inquiries, contact our team:</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="mailto:info@opendeck.co.uk?subject=Gaming%20Operator%20Support" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-all text-center">
+                                Contact Support
+                            </a>
+                            <a href="developers.html#operator-setup" class="bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition-all text-center">
+                                View Full Documentation
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
