@@ -1,0 +1,93 @@
+# Code Examples
+
+## JavaScript/TypeScript
+
+### Authentication
+
+<CodeBlock language="javascript" title="Register User">
+```javascript
+// Register a new user
+const response = await fetch('https://api.opendeck.co.uk/api/auth/register', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    email: 'user@example.com',
+    password: 'securePassword123',
+    firstName: 'John',
+    lastName: 'Doe'
+  })
+});
+
+const data = await response.json();
+const token = data.token; // Store for authenticated requests
+```
+</CodeBlock>
+
+### Authenticated Request
+
+<CodeBlock language="javascript" title="Make Authenticated API Call">
+```javascript
+// Make authenticated API call
+const response = await fetch('https://api.opendeck.co.uk/api/accounts', {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  }
+});
+
+const accounts = await response.json();
+```
+</CodeBlock>
+
+## Python
+
+<CodeBlock language="python" title="Python Example">
+```python
+import requests
+
+# Register operator
+response = requests.post(
+    'https://api.opendeck.co.uk/api/gaming/operators',
+    json={
+        'company_name': 'Example Gaming Ltd',
+        'trading_name': 'Example Casino',
+        'contact_email': 'api@example.com',
+        'contact_phone': '+44 20 1234 5678'
+    }
+)
+
+data = response.json()
+api_key = data['api_key']
+api_secret = data['api_secret']
+
+# Use API key for authenticated requests
+headers = {'X-API-Key': api_key}
+dashboard = requests.get(
+    'https://api.opendeck.co.uk/api/merchant/dashboard/overview',
+    headers=headers,
+    params={'period': 'month'}
+)
+```
+</CodeBlock>
+
+## cURL
+
+<CodeBlock language="bash" title="cURL Examples">
+```bash
+# Register operator
+curl -X POST https://api.opendeck.co.uk/api/gaming/operators \
+  -H "Content-Type: application/json" \
+  -d '{
+    "company_name": "Example Gaming Ltd",
+    "trading_name": "Example Casino",
+    "contact_email": "api@example.com"
+  }'
+
+# Authenticated request
+curl -X GET "https://api.opendeck.co.uk/api/merchant/dashboard/overview?period=month" \
+  -H "X-API-Key: opdk_live_YOUR_API_KEY_HERE"
+```
+</CodeBlock>

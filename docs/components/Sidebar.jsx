@@ -9,26 +9,25 @@ export default function Sidebar({ open, onClose }) {
       section: 'Getting Started',
       items: [
         { href: '/', label: 'Introduction' },
-        { href: '/quick-start', label: 'Quick Start' },
+        { href: '/', label: 'Quick Start' },
         { href: '/authentication', label: 'Authentication' },
       ],
     },
     {
       section: 'API Reference',
       items: [
-        { href: '/api/categories', label: 'API Categories' },
-        { href: '/api/request-response', label: 'Request & Response' },
-        { href: '/api/examples', label: 'Code Examples' },
+        { href: '/', label: 'API Categories' },
+        { href: '/', label: 'Request & Response' },
+        { href: '/', label: 'Code Examples' },
       ],
     },
     {
       section: 'Integration Guides',
       items: [
-        { href: '/guides/operator-setup', label: 'Operator Setup' },
-        { href: '/guides/gaming-operators', label: 'Gaming Operators' },
-        { href: '/guides/pension-providers', label: 'Pension Providers' },
-        { href: '/guides/utility-providers', label: 'Utility Providers' },
-        { href: '/guides/events', label: 'Events & Entertainment' },
+        { href: '/gaming-operators', label: 'Gaming Operators' },
+        { href: '/pension-providers', label: 'Pension Providers' },
+        { href: '/utility-providers', label: 'Utility Providers' },
+        { href: '/events', label: 'Events & Entertainment' },
       ],
     },
   ]

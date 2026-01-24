@@ -1,0 +1,237 @@
+# Gaming & Gambling Operators
+
+Online casinos, sportsbooks, esports platforms, fantasy sports, and skill-based gaming can integrate with Opendeck to process payments with ML-powered affordability checks, real-time transaction processing, and comprehensive player account management.
+
+<Alert type="warning" title="Security First">
+All connections are encrypted, authenticated, and comply with PSD2, UK Gambling Commission regulations, and GDPR. Your API credentials are hashed and never stored in plain text.
+</Alert>
+
+## Step 1: Register as a Gaming Operator
+
+Start by registering your gaming operator organization with Opendeck. This creates your operator account and generates secure API credentials.
+
+<APIEndpoint method="POST" path="/api/gaming/operators" description="Register your gaming operator">
+```json
+{
+  "company_name": "Gaming Operator Ltd",
+  "trading_name": "Your Casino Brand",
+  "contact_email": "api@yourcasino.com",
+  "contact_phone": "+44 20 1234 5678",
+  "company_number": "12345678",
+  "uk_gambling_license": "LIC123456",
+  "website_url": "https://www.yourcasino.com",
+  "webhook_url": "https://api.yourcasino.com/webhooks/opendeck"
+}
+```
+
+**Response:**
+```json
+{
+  "operator_id": "550e8400-e29b-41d4-a716-446655440000",
+  "api_key": "opdk_live_abc123...",
+  "api_secret": "opdk_secret_xyz789..."
+}
+```
+
+<Alert type="error" title="Critical">
+⚠️ Save these credentials immediately! They are only shown once and cannot be recovered.
+</Alert>
+</APIEndpoint>
+
+**Required Fields:**
+- `company_name` - Your registered company name
+- `trading_name` - Your public-facing brand name
+- `contact_email` - Technical contact email
+- `contact_phone` - Contact phone number
+
+**Optional Fields:**
+- `company_number` - UK Companies House number
+- `uk_gambling_license` - UK Gambling Commission license number (required for UK operators)
+- `website_url` - Your public website URL
+- `webhook_url` - Your webhook endpoint for real-time notifications
+
+## Step 2: Account Activation & Verification
+
+After registration, your operator account starts with `pending` status. Opendeck will review your application for compliance and activate your account.
+
+<APIEndpoint method="GET" path="/api/gaming/operators/me" description="Check your account status">
+**Headers:**
+```
+X-API-Key: opdk_live_YOUR_API_KEY_HERE
+```
+
+**Response:**
+```json
+{
+  "operator_id": "550e8400-e29b-41d4-a716-446655440000",
+  "company_name": "Gaming Operator Ltd",
+  "trading_name": "Your Casino Brand",
+  "status": "pending",
+  "created_at": "2024-01-15T10:30:00Z"
+}
+```
+</APIEndpoint>
+
+<Alert type="info">
+Activation typically takes 1-2 business days for compliance review. You'll receive an email notification when your account is activated.
+</Alert>
+
+## Step 3: Create Player Accounts
+
+Before processing transactions, create player accounts for your users.
+
+<APIEndpoint method="POST" path="/api/gaming/players" description="Create a player account">
+**Headers:**
+```
+X-API-Key: opdk_live_YOUR_API_KEY_HERE
+Content-Type: application/json
+```
+
+**Request:**
+```json
+{
+  "operator_id": "550e8400-e29b-41d4-a716-446655440000",
+  "player_id": "player_12345",
+  "email": "player@example.com",
+  "first_name": "John",
+  "last_name": "Doe",
+  "date_of_birth": "1990-01-15",
+  "country": "GB"
+}
+```
+</APIEndpoint>
+
+## Step 4: Process Deposits & Withdrawals
+
+Process player deposits and withdrawals with automatic affordability checks.
+
+<APIEndpoint method="POST" path="/api/gaming/transactions" description="Create a deposit transaction">
+**Request:**
+```json
+{
+  "operator_id": "550e8400-e29b-41d4-a716-446655440000",
+  "player_id": "player_12345",
+  "type": "deposit",
+  "amount": 100.00,
+  "currency": "GBP",
+  "operator_transaction_id": "CASINO-TXN-12345"
+}
+```
+
+**Response:**
+```json
+{
+  "transaction_id": "txn_abc123",
+  "operator_transaction_id": "CASINO-TXN-12345",
+  "player_id": "player_12345",
+  "type": "deposit",
+  "amount": 100.00,
+  "currency": "GBP",
+  "status": "pending",
+  "affordability_check": {
+    "status": "approved",
+    "risk_score": 0.15,
+    "recommendation": "proceed"
+  },
+  "created_at": "2024-01-15T10:30:00Z"
+}
+```
+</APIEndpoint>
+
+## Step 5: ML-Powered Affordability Checks
+
+Opendeck automatically performs ML-powered affordability checks on all transactions.
+
+<APIEndpoint method="POST" path="/api/gaming/affordability/check" description="Request affordability check">
+**Request:**
+```json
+{
+  "player_id": "player_12345",
+  "amount": 500.00,
+  "currency": "GBP",
+  "transaction_type": "deposit"
+}
+```
+
+**Response:**
+```json
+{
+  "affordability_status": "approved",
+  "risk_score": 0.12,
+  "recommendation": "proceed",
+  "factors": {
+    "income_verification": "verified",
+    "spending_pattern": "normal",
+    "deposit_frequency": "moderate"
+  },
+  "warnings": []
+}
+```
+</APIEndpoint>
+
+**Affordability Status Values:**
+- `approved` - Transaction is safe to proceed
+- `warning` - Proceed with caution, review recommended
+- `rejected` - Transaction should be declined
+
+## Step 6: Webhook Integration
+
+Receive real-time notifications about transaction status changes.
+
+**Webhook Events:**
+- `transaction.status_changed` - Transaction status updated
+- `transaction.completed` - Transaction completed successfully
+- `transaction.failed` - Transaction failed
+- `affordability.check_completed` - Affordability check completed
+- `player.account_created` - New player account created
+
+<CodeBlock language="json" title="Webhook Payload Example">
+```json
+{
+  "event": "transaction.status_changed",
+  "timestamp": "2024-01-15T10:30:00Z",
+  "data": {
+    "transaction_id": "txn_abc123",
+    "operator_transaction_id": "CASINO-TXN-12345",
+    "status": "completed",
+    "amount": 100.00,
+    "currency": "GBP"
+  }
+}
+```
+</CodeBlock>
+
+<Alert type="warning" title="Security">
+All webhooks are signed with HMAC SHA-256. Verify the signature using your API secret to ensure the webhook is from Opendeck.
+</Alert>
+
+## Step 7: Access Merchant Dashboard
+
+Access your merchant dashboard to view transaction analytics and player statistics.
+
+<APIEndpoint method="GET" path="/api/merchant/dashboard/overview" description="Get dashboard overview">
+**Query Parameters:**
+- `period` - Time period: `day`, `week`, `month`, `year`
+
+**Response:**
+```json
+{
+  "period": "day",
+  "total_transactions": 1250,
+  "total_volume": 125000.00,
+  "successful_transactions": 1180,
+  "failed_transactions": 70,
+  "average_transaction_value": 100.00,
+  "top_players": [...]
+}
+```
+</APIEndpoint>
+
+## Best Practices & Compliance
+
+- ✅ **Always verify affordability checks** before processing large deposits
+- ✅ **Store API credentials securely** - Never commit them to version control
+- ✅ **Implement webhook signature verification** to ensure authenticity
+- ✅ **Use idempotency keys** for transaction requests to prevent duplicates
+- ✅ **Monitor transaction status** and handle failed transactions appropriately
+- ✅ **Comply with UK Gambling Commission** regulations including age verification and self-exclusion

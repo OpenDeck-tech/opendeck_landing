@@ -1,0 +1,58 @@
+# API Request & Response Examples
+
+## Register Operator
+
+<APIEndpoint method="POST" path="/api/gaming/operators" description="Register a new gaming operator">
+**Request:**
+```bash
+curl -X POST https://api.opendeck.co.uk/api/gaming/operators \
+  -H "Content-Type: application/json" \
+  -d '{
+    "company_name": "Example Gaming Ltd",
+    "trading_name": "Example Casino",
+    "contact_email": "api@example.com",
+    "contact_phone": "+44 20 1234 5678",
+    "company_number": "12345678",
+    "uk_gambling_license": "LIC123456"
+  }'
+```
+
+**Response (200 OK):**
+```json
+{
+  "operator_id": "123e4567-e89b-12d3-a456-426614174000",
+  "api_key": "opdk_live_TZfnxh-dZlRDQ2DWbam0grXwToSXjlPZt4OQSIpF7Tc",
+  "api_secret": "KhSxDRVf6ymBgHZjKVWxNkjdmHj5ggkRTIud2cxdP3DuxqtAyTDQhYrPe4IPdfKP"
+}
+```
+
+<Alert type="warning" title="Important">
+Save your API credentials immediately - they won't be shown again!
+</Alert>
+</APIEndpoint>
+
+## Authenticated Request
+
+<APIEndpoint method="GET" path="/api/merchant/dashboard/overview" description="Get merchant dashboard overview">
+**Request:**
+```bash
+curl -X GET "https://api.opendeck.co.uk/api/merchant/dashboard/overview?period=month" \
+  -H "X-API-Key: opdk_live_YOUR_API_KEY_HERE"
+```
+
+**Response (200 OK):**
+```json
+{
+  "total_volume": 125000.50,
+  "total_revenue": 1875.75,
+  "transaction_count": 342,
+  "success_rate": 0.98,
+  "active_players": 156,
+  "pending_transactions": 3,
+  "volume_change_percent": 12.5,
+  "revenue_change_percent": 8.3,
+  "period_start": "2024-11-17T00:00:00Z",
+  "period_end": "2024-12-17T00:00:00Z"
+}
+```
+</APIEndpoint>

@@ -1,0 +1,78 @@
+# API Categories
+
+Opendeck provides comprehensive APIs for various financial services.
+
+## Authentication
+
+<Card title="Authentication APIs">
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login and get token
+- `POST /api/auth/logout` - Logout
+- `GET /api/auth/me` - Get current user
+</Card>
+
+## Gaming & Gambling
+
+<Card title="Gaming & Gambling APIs">
+- `POST /api/gaming/operators` - Register operator
+- `POST /api/gaming/transactions` - Process transaction
+- `GET /api/gaming/stats` - Get statistics
+- `POST /api/gaming/affordability` - Check affordability
+</Card>
+
+## Pension Payments
+
+<Card title="Pension Payment APIs">
+- `GET /api/pensions/accounts` - List pension accounts
+- `POST /api/pensions/pay` - Make pension payment
+- `GET /api/pensions/payments` - Get payment history
+- `GET /api/pensions/providers` - List providers
+</Card>
+
+## Utilities Payments
+
+<Card title="Utilities Payment APIs">
+- `GET /api/utilities/accounts` - List utility accounts
+- `POST /api/utilities/pay` - Pay utility bill
+- `GET /api/utilities/payments` - Payment history
+- `GET /api/utilities/providers` - List providers
+</Card>
+
+## Open Banking
+
+<Card title="Open Banking APIs">
+- `GET /api/banks` - List available banks
+- `GET /api/accounts` - Get bank accounts
+- `POST /api/payments` - Initiate payment
+- `GET /api/analytics/spending` - Spending analytics
+</Card>
+
+## Events & Entertainment
+
+<Card title="Events & Entertainment APIs">
+- `POST /api/events/venues` - Register venue
+- `POST /api/events/payments` - Process event payment
+- `GET /api/events/contributions` - View contributions
+
+<Alert type="info">
+✨ **Proprietary Feature:** Automatic pension micro-contributions (0.01%) from event payments
+</Alert>
+</Card>
+
+## Analytics & Insights
+
+<Card title="Analytics APIs">
+- `GET /api/risk-assessment/{id}` - Risk assessment
+- `GET /api/business-insights/{id}` - Business insights
+- `GET /api/products` - Available products
+- `GET /api/offers/{user_id}` - Personalized offers
+</Card>
+
+## Admin Dashboard
+
+<Card title="Admin APIs">
+- `POST /api/admin/auth/login` - Admin login
+- `GET /api/admin/operators` - List operators
+- `GET /api/admin/revenue` - Revenue analytics
+- `GET /api/admin/transactions` - Transaction management
+</Card>

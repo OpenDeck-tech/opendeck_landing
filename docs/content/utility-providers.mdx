@@ -1,0 +1,60 @@
+# Utility Service Providers
+
+Utility providers (electricity, gas, water, broadband, mobile) can integrate with Opendeck to enable bill payments from users with ML-powered affordability checks and usage predictions.
+
+## Step 1: Register as an Operator
+
+Utility providers use the same operator registration endpoint as gaming operators:
+
+<APIEndpoint method="POST" path="/api/gaming/operators" description="Register utility provider">
+```json
+{
+  "company_name": "Utility Provider Ltd",
+  "trading_name": "Your Utility Service",
+  "contact_email": "api@utilityprovider.com",
+  "contact_phone": "+44 20 1234 5678",
+  "company_number": "12345678",
+  "website_url": "https://utilityprovider.com"
+}
+```
+
+<Alert type="info">
+Note: `uk_gambling_license` is not required for utility providers.
+</Alert>
+</APIEndpoint>
+
+## Step 2: Process Utility Payments
+
+Process utility bill payments with ML-powered affordability checks.
+
+<APIEndpoint method="POST" path="/api/utilities/pay" description="Process utility payment">
+**Request:**
+```json
+{
+  "utility_account_id": "utility_12345",
+  "amount": 75.50,
+  "currency": "GBP",
+  "bill_type": "electricity",
+  "due_date": "2024-02-01"
+}
+```
+
+**Response:**
+```json
+{
+  "payment_id": "pay_abc123",
+  "status": "pending",
+  "affordability_check": {
+    "status": "approved",
+    "risk_score": 0.08
+  }
+}
+```
+</APIEndpoint>
+
+## Step 3: ML-Powered Features
+
+- **Affordability Checks** - Automatic verification before payment
+- **Usage Predictions** - ML-powered usage forecasting
+- **Payment Optimization** - Smart payment scheduling
+- **Bill Analysis** - Automated bill breakdown and insights

@@ -1,0 +1,97 @@
+# Events & Entertainment
+
+Proprietary feature: Automatic pension micro-contributions (0.01%) from event payments.
+
+<Alert type="info" title="Proprietary Feature">
+✨ This is a unique Opendeck feature that automatically contributes 0.01% of event payments to users' pension accounts.
+</Alert>
+
+## Overview
+
+When users make payments at events (concerts, sports matches, festivals), Opendeck automatically calculates and contributes 0.01% of the payment amount to their pension account.
+
+**Example:**
+- User pays £75 for event tickets
+- Automatic micro-contribution: £0.0075 (0.01% of £75)
+- Payment processed normally
+- Micro-contribution added to pension account
+
+## Step 1: Register as Event Venue
+
+<APIEndpoint method="POST" path="/api/events/venues" description="Register event venue">
+```json
+{
+  "venue_name": "Wembley Stadium",
+  "venue_type": "stadium",
+  "contact_email": "api@wembley.com",
+  "contact_phone": "+44 20 1234 5678",
+  "address": "Wembley, London, UK"
+}
+```
+</APIEndpoint>
+
+## Step 2: Process Event Payments
+
+<APIEndpoint method="POST" path="/api/events/payments" description="Process event payment">
+**Request:**
+```json
+{
+  "venue_id": "venue_12345",
+  "user_id": "user_12345",
+  "amount": 75.00,
+  "currency": "GBP",
+  "event_type": "concert",
+  "items": [
+    {"name": "Ticket", "amount": 50.00},
+    {"name": "Food & Drinks", "amount": 25.00}
+  ]
+}
+```
+
+**Response:**
+```json
+{
+  "payment_id": "pay_abc123",
+  "status": "completed",
+  "amount": 75.00,
+  "micro_contribution": {
+    "amount": 0.0075,
+    "pension_account_id": "pension_12345",
+    "status": "completed"
+  }
+}
+```
+</APIEndpoint>
+
+## Step 3: View Micro-Contributions
+
+Users can view their pension micro-contributions from events:
+
+<APIEndpoint method="GET" path="/api/events/contributions" description="Get event contributions">
+**Response:**
+```json
+{
+  "contributions": [
+    {
+      "id": "contrib-uuid",
+      "event_payment_id": "payment-uuid",
+      "pension_account_id": "pension-uuid",
+      "amount": 0.0075,
+      "currency": "GBP",
+      "status": "completed",
+      "created_at": "2024-12-15T15:30:00Z"
+    }
+  ],
+  "total_contributed": 0.0525,
+  "total_count": 7
+}
+```
+</APIEndpoint>
+
+## Benefits for Venues
+
+- **Marketing Advantage** - Unique value proposition to attract attendees
+- **Social Impact** - Demonstrates commitment to financial wellness
+- **Competitive Differentiation** - Stand out from competitors
+- **Low Integration Cost** - Minimal setup, automatic processing
+- **User Engagement** - Users see real-time contributions, increasing loyalty

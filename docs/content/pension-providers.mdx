@@ -1,0 +1,85 @@
+# Pension Service Providers
+
+Production-ready integration guide for pension providers to enable users to make pension contributions through Open Banking.
+
+<Alert type="warning" title="Security First">
+All connections are encrypted, authenticated, and comply with PSD2 and GDPR regulations. Your API credentials are hashed and never stored in plain text.
+</Alert>
+
+## Step 1: Register as a Pension Provider
+
+Start by registering your pension provider organization with Opendeck.
+
+<APIEndpoint method="POST" path="/api/gaming/operators" description="Register your pension provider">
+```json
+{
+  "company_name": "NEST Corporation",
+  "trading_name": "NEST Pensions",
+  "contact_email": "api@nestpensions.com",
+  "contact_phone": "+44 20 1234 5678",
+  "company_number": "RC000727",
+  "website_url": "https://www.nestpensions.org.uk",
+  "webhook_url": "https://api.nestpensions.com/webhooks/opendeck"
+}
+```
+
+**Response:**
+```json
+{
+  "operator_id": "550e8400-e29b-41d4-a716-446655440000",
+  "api_key": "opdk_live_abc123...",
+  "api_secret": "opdk_secret_xyz789..."
+}
+```
+
+<Alert type="error" title="Critical">
+⚠️ Save these credentials immediately! They are only shown once and cannot be recovered.
+</Alert>
+</APIEndpoint>
+
+## Step 2: Account Activation
+
+Check your account status by calling `GET /api/gaming/operators/me` with your API key. Status will change from `pending` to `active` when approved.
+
+<Alert type="info">
+Activation typically takes 1-2 business days for compliance review.
+</Alert>
+
+## Step 3: Enable Pension Contributions
+
+Once activated, users can make pension contributions through your platform using Open Banking.
+
+<APIEndpoint method="POST" path="/api/pensions/pay" description="Process pension contribution">
+**Request:**
+```json
+{
+  "pension_account_id": "pension_12345",
+  "amount": 100.00,
+  "currency": "GBP",
+  "user_id": "user_12345"
+}
+```
+
+**Response:**
+```json
+{
+  "payment_id": "pay_abc123",
+  "status": "pending",
+  "amount": 100.00,
+  "currency": "GBP",
+  "created_at": "2024-01-15T10:30:00Z"
+}
+```
+</APIEndpoint>
+
+## Step 4: View Payment History
+
+Retrieve payment history for pension accounts.
+
+<APIEndpoint method="GET" path="/api/pensions/payments" description="Get payment history">
+**Query Parameters:**
+- `pension_account_id` - Filter by account
+- `status` - Filter by status
+- `from_date` - Start date
+- `to_date` - End date
+</APIEndpoint>
