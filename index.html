@@ -1073,12 +1073,137 @@
     <section id="contact" class="py-24 gradient-hero relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-opendeck-900/50 to-opendeck-700/50"></div>
         <div class="max-w-4xl mx-auto px-6 lg:px-8 relative z-10">
-            <div class="text-center animate-on-scroll">
+            <div class="text-center animate-on-scroll mb-12">
                 <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">Ready to Get Started?</h2>
                 <p class="text-xl mb-10 text-blue-100 max-w-2xl mx-auto leading-relaxed">Join thousands of businesses already using Opendeck to power their financial infrastructure.</p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="mailto:info@opendeck.co.uk?subject=Sales%20Inquiry%20-%20Opendeck" class="bg-white text-opendeck-500 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1" style="text-decoration: none; display: inline-block;">Contact Sales</a>
-                    <a href="developers.html" class="glass text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/20 transition-all duration-300 border border-white/30">View Documentation</a>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+                    <button id="operator-register-btn" class="bg-white text-opendeck-500 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">Register as Operator</button>
+                    <a href="mailto:info@opendeck.co.uk?subject=Sales%20Inquiry%20-%20Opendeck" class="glass text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/20 transition-all duration-300 border border-white/30 text-center">Contact Sales</a>
+                    <a href="developers.html" class="glass text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/20 transition-all duration-300 border border-white/30 text-center">View Documentation</a>
+                </div>
+            </div>
+
+            <!-- Operator Registration Form -->
+            <div id="operator-register-form" class="hidden premium-card p-8 animate-on-scroll">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-900">Register as Operator</h3>
+                    <button id="close-form-btn" class="text-gray-500 hover:text-gray-700">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+                <p class="text-gray-600 mb-6">Fill out the form below to register your organization as an operator. You'll receive API credentials immediately after registration.</p>
+                
+                <form id="operator-form" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="company_name" class="block text-sm font-semibold text-gray-700 mb-2">Company Name *</label>
+                            <input type="text" id="company_name" name="company_name" required
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-opendeck-500 focus:outline-none transition-all"
+                                placeholder="Your Company Ltd">
+                        </div>
+                        <div>
+                            <label for="trading_name" class="block text-sm font-semibold text-gray-700 mb-2">Trading Name *</label>
+                            <input type="text" id="trading_name" name="trading_name" required
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-opendeck-500 focus:outline-none transition-all"
+                                placeholder="Your Trading Name">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="contact_email" class="block text-sm font-semibold text-gray-700 mb-2">Contact Email *</label>
+                            <input type="email" id="contact_email" name="contact_email" required
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-opendeck-500 focus:outline-none transition-all"
+                                placeholder="contact@example.com">
+                        </div>
+                        <div>
+                            <label for="contact_phone" class="block text-sm font-semibold text-gray-700 mb-2">Contact Phone *</label>
+                            <input type="tel" id="contact_phone" name="contact_phone" required
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-opendeck-500 focus:outline-none transition-all"
+                                placeholder="+44 20 1234 5678">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="company_number" class="block text-sm font-semibold text-gray-700 mb-2">Company Number</label>
+                            <input type="text" id="company_number" name="company_number"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-opendeck-500 focus:outline-none transition-all"
+                                placeholder="RC000727 (optional)">
+                        </div>
+                        <div>
+                            <label for="uk_gambling_license" class="block text-sm font-semibold text-gray-700 mb-2">UK Gambling License</label>
+                            <input type="text" id="uk_gambling_license" name="uk_gambling_license"
+                                class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-opendeck-500 focus:outline-none transition-all"
+                                placeholder="LIC123456 (optional, gaming only)">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="website_url" class="block text-sm font-semibold text-gray-700 mb-2">Website URL</label>
+                        <input type="url" id="website_url" name="website_url"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-opendeck-500 focus:outline-none transition-all"
+                            placeholder="https://www.example.com (optional)">
+                    </div>
+
+                    <div>
+                        <label for="webhook_url" class="block text-sm font-semibold text-gray-700 mb-2">Webhook URL</label>
+                        <input type="url" id="webhook_url" name="webhook_url"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-opendeck-500 focus:outline-none transition-all"
+                            placeholder="https://api.example.com/webhooks/opendeck (optional)">
+                        <p class="mt-2 text-xs text-gray-500">Your webhook endpoint for receiving real-time notifications</p>
+                    </div>
+
+                    <div id="operator-message" class="hidden p-4 rounded-xl text-sm"></div>
+
+                    <button type="submit" id="operator-submit-btn" class="w-full btn-primary">
+                        Register Operator
+                    </button>
+                </form>
+
+                <!-- Credentials Display (shown after successful registration) -->
+                <div id="operator-credentials" class="hidden mt-6">
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded mb-4">
+                        <p class="text-sm text-yellow-800 font-semibold mb-2">⚠️ IMPORTANT: Save these credentials now!</p>
+                        <p class="text-xs text-yellow-700">These credentials are only shown once and cannot be recovered. Store them securely.</p>
+                    </div>
+                    <div class="bg-gray-900 rounded-xl p-6">
+                        <div class="mb-4">
+                            <label class="block text-xs text-gray-400 mb-1">Operator ID</label>
+                            <div class="flex items-center justify-between bg-gray-800 rounded-lg p-3">
+                                <code id="operator-id-display" class="text-green-400 text-sm font-mono"></code>
+                                <button onclick="copyToClipboard('operator-id-display')" class="text-gray-400 hover:text-white ml-2">
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-xs text-gray-400 mb-1">API Key</label>
+                            <div class="flex items-center justify-between bg-gray-800 rounded-lg p-3">
+                                <code id="api-key-display" class="text-green-400 text-sm font-mono break-all"></code>
+                                <button onclick="copyToClipboard('api-key-display')" class="text-gray-400 hover:text-white ml-2">
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 mb-1">API Secret</label>
+                            <div class="flex items-center justify-between bg-gray-800 rounded-lg p-3">
+                                <code id="api-secret-display" class="text-green-400 text-sm font-mono break-all"></code>
+                                <button onclick="copyToClipboard('api-secret-display')" class="text-gray-400 hover:text-white ml-2">
+                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1233,6 +1358,184 @@
 
         document.querySelectorAll('.animate-on-scroll').forEach((element) => {
             observer.observe(element);
+        });
+
+        // Operator Registration Form
+        const operatorRegisterBtn = document.getElementById('operator-register-btn');
+        const operatorForm = document.getElementById('operator-register-form');
+        const closeFormBtn = document.getElementById('close-form-btn');
+        const operatorFormElement = document.getElementById('operator-form');
+        const operatorSubmitBtn = document.getElementById('operator-submit-btn');
+        const operatorMessage = document.getElementById('operator-message');
+        const operatorCredentials = document.getElementById('operator-credentials');
+
+        // Show form
+        operatorRegisterBtn?.addEventListener('click', () => {
+            operatorForm?.classList.remove('hidden');
+            operatorForm?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+
+        // Close form
+        closeFormBtn?.addEventListener('click', () => {
+            operatorForm?.classList.add('hidden');
+            operatorCredentials?.classList.add('hidden');
+            operatorFormElement?.reset();
+        });
+
+        // API Configuration
+        function getApiBaseUrl() {
+            if (window.location.hostname === 'opendeck.co.uk' || window.location.hostname === 'www.opendeck.co.uk') {
+                return 'https://api.opendeck.co.uk/api';
+            }
+            return window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? 'http://localhost:8000/api'
+                : 'https://api.opendeck.co.uk/api';
+        }
+        
+        const API_BASE_URL = getApiBaseUrl();
+
+        // Utility function to show messages
+        function showOperatorMessage(message, isSuccess = true) {
+            if (!operatorMessage) return;
+            
+            operatorMessage.textContent = message;
+            operatorMessage.classList.remove('hidden');
+            operatorMessage.className = isSuccess 
+                ? 'p-4 rounded-xl text-sm bg-green-50 text-green-800 border border-green-200' 
+                : 'p-4 rounded-xl text-sm bg-red-50 text-red-800 border border-red-200';
+            
+            setTimeout(() => {
+                operatorMessage.classList.add('hidden');
+            }, 5000);
+        }
+
+        // Set loading state
+        function setOperatorLoading(isLoading) {
+            if (operatorSubmitBtn) {
+                operatorSubmitBtn.disabled = isLoading;
+                if (isLoading) {
+                    operatorSubmitBtn.textContent = 'Registering...';
+                } else {
+                    operatorSubmitBtn.textContent = 'Register Operator';
+                }
+            }
+        }
+
+        // Copy to clipboard function
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            const text = element.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                // Show temporary feedback
+                const originalText = element.textContent;
+                element.textContent = 'Copied!';
+                setTimeout(() => {
+                    element.textContent = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+
+        // Make copyToClipboard available globally
+        window.copyToClipboard = copyToClipboard;
+
+        // Form submission handler
+        operatorFormElement?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                company_name: document.getElementById('company_name')?.value || '',
+                trading_name: document.getElementById('trading_name')?.value || '',
+                contact_email: document.getElementById('contact_email')?.value || '',
+                contact_phone: document.getElementById('contact_phone')?.value || '',
+            };
+
+            // Optional fields
+            const companyNumber = document.getElementById('company_number')?.value;
+            const gamblingLicense = document.getElementById('uk_gambling_license')?.value;
+            const websiteUrl = document.getElementById('website_url')?.value;
+            const webhookUrl = document.getElementById('webhook_url')?.value;
+
+            if (companyNumber) formData.company_number = companyNumber;
+            if (gamblingLicense) formData.uk_gambling_license = gamblingLicense;
+            if (websiteUrl) formData.website_url = websiteUrl;
+            if (webhookUrl) formData.webhook_url = webhookUrl;
+
+            // Validate required fields
+            if (!formData.company_name || !formData.trading_name || !formData.contact_email || !formData.contact_phone) {
+                showOperatorMessage('Please fill in all required fields.', false);
+                return;
+            }
+
+            setOperatorLoading(true);
+            showOperatorMessage('');
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/gaming/operators`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Display credentials
+                    if (data.operator_id) {
+                        document.getElementById('operator-id-display').textContent = data.operator_id;
+                    }
+                    if (data.api_key) {
+                        document.getElementById('api-key-display').textContent = data.api_key;
+                    }
+                    if (data.api_secret) {
+                        document.getElementById('api-secret-display').textContent = data.api_secret;
+                    }
+                    
+                    operatorCredentials?.classList.remove('hidden');
+                    operatorFormElement?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    showOperatorMessage('Registration successful! Please save your credentials.', true);
+                    
+                    // Hide form, show credentials
+                    operatorFormElement.style.display = 'none';
+                } else {
+                    let errorMessage = 'Registration failed. Please try again.';
+                    
+                    try {
+                        const errorData = await response.json();
+                        errorMessage = errorData.detail || errorData.message || errorData.error || errorMessage;
+                    } catch (parseError) {
+                        if (response.status === 400) {
+                            errorMessage = 'Invalid data. Please check your input.';
+                        } else if (response.status === 409) {
+                            errorMessage = 'An operator with this email already exists.';
+                        } else if (response.status >= 500) {
+                            errorMessage = 'Server error. Please try again later.';
+                        }
+                    }
+                    
+                    showOperatorMessage(errorMessage, false);
+                    setOperatorLoading(false);
+                }
+            } catch (error) {
+                console.error('Operator registration error:', error);
+                
+                let errorMessage = 'Network error. Please check your connection and try again.';
+                
+                if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    errorMessage = 'Unable to connect to the server. Please check your internet connection or contact support.';
+                } else if (error.message) {
+                    errorMessage = `Error: ${error.message}`;
+                }
+                
+                showOperatorMessage(errorMessage, false);
+                setOperatorLoading(false);
+            }
         });
 
         // Navbar scroll effect
