@@ -1,20 +1,10 @@
 import '../styles/globals.css'
 import { MDXProvider } from '@mdx-js/react'
-import { CodeBlock } from '../components/CodeBlock'
-import { APIEndpoint } from '../components/APIEndpoint'
-import { Card } from '../components/Card'
-import { Alert } from '../components/Alert'
-
-const components = {
-  pre: CodeBlock,
-  APIEndpoint,
-  Card,
-  Alert,
-}
+import { mdxComponents } from '../mdx-components'
 
 export default function App({ Component, pageProps }) {
   return (
-    <MDXProvider components={components}>
+    <MDXProvider components={mdxComponents}>
       <Component {...pageProps} />
     </MDXProvider>
   )
