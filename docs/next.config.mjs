@@ -19,6 +19,7 @@ const withMDX = createMDX({
       rehypeSlug,
       rehypeAutolinkHeadings,
     ],
+    providerImportSource: '@mdx-js/react',
   },
 })
 
