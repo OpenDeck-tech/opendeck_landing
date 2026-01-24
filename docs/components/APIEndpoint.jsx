@@ -1,10 +1,10 @@
 export function APIEndpoint({ method, path, description, children }) {
   const methodColors = {
-    GET: 'text-green-400',
-    POST: 'text-blue-400',
-    PUT: 'text-yellow-400',
-    PATCH: 'text-orange-400',
-    DELETE: 'text-red-400',
+    GET: 'text-white',
+    POST: 'text-white',
+    PUT: 'text-white',
+    PATCH: 'text-white',
+    DELETE: 'text-white',
   }
 
   return (
@@ -18,7 +18,10 @@ export function APIEndpoint({ method, path, description, children }) {
       {description && (
         <p className="text-gray-300 mb-4">{description}</p>
       )}
-      {children}
+      <div className="text-gray-300">{children}</div>
     </div>
   )
 }
+
+// Also export as default for MDX
+export default APIEndpoint

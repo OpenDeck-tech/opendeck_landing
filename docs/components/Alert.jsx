@@ -1,9 +1,9 @@
 export function Alert({ type = 'info', title, children }) {
   const styles = {
-    info: 'border-blue-500/30 bg-blue-500/10',
-    warning: 'border-yellow-500/30 bg-yellow-500/10',
-    success: 'border-green-500/30 bg-green-500/10',
-    error: 'border-red-500/30 bg-red-500/10',
+    info: 'border-matte-border bg-matte-dark',
+    warning: 'border-matte-border bg-matte-dark',
+    success: 'border-matte-border bg-matte-dark',
+    error: 'border-matte-border bg-matte-dark',
   }
 
   return (
@@ -15,3 +15,6 @@ export function Alert({ type = 'info', title, children }) {
     </div>
   )
 }
+
+// Also export as default for MDX
+export default Alert

@@ -7,7 +7,10 @@ export function Card({ title, icon, children, className = '' }) {
           <h3 className="text-xl font-bold text-white">{title}</h3>
         </div>
       )}
-      {children}
+      <div className="text-gray-300">{children}</div>
     </div>
   )
 }
+
+// Also export as default for MDX
+export default Card
