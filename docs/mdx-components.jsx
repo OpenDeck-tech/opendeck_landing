@@ -3,7 +3,7 @@ import { APIEndpoint } from './components/APIEndpoint'
 import { Card } from './components/Card'
 import { Alert } from './components/Alert'
 
-export function useMDXComponents(components) {
+export function useMDXComponents(components = {}) {
   return {
     pre: (props) => <CodeBlock {...props} />,
     code: (props) => {
@@ -20,3 +20,6 @@ export function useMDXComponents(components) {
     ...components,
   }
 }
+
+// Also export as default for compatibility
+export default useMDXComponents
