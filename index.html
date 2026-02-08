@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#0052FF">
     <meta name="description" content="Opendeck: Building the future of open-finance infrastructure on top of payments">
     <title>Opendeck - Open-Finance Infrastructure</title>
     
@@ -111,15 +114,120 @@
         * {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
             letter-spacing: -0.01em;
+            /* iOS safe area support */
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
         }
         
         html {
             scroll-behavior: smooth;
+            /* Prevent horizontal scroll on mobile */
+            overflow-x: hidden;
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            /* Better touch targets - minimum 44x44px */
+            button, a.btn-primary, a.btn-secondary {
+                min-height: 44px;
+                min-width: 44px;
+                padding: 12px 24px;
+            }
+            
+            /* Improved mobile typography */
+            h1 {
+                font-size: clamp(2rem, 8vw, 3.5rem) !important;
+                line-height: 1.1 !important;
+            }
+            
+            h2 {
+                font-size: clamp(1.75rem, 6vw, 2.5rem) !important;
+                line-height: 1.2 !important;
+            }
+            
+            h3 {
+                font-size: clamp(1.5rem, 5vw, 2rem) !important;
+                line-height: 1.3 !important;
+            }
+            
+            /* Better mobile spacing */
+            section {
+                padding-top: clamp(3rem, 8vw, 6rem) !important;
+                padding-bottom: clamp(3rem, 8vw, 6rem) !important;
+            }
+            
+            /* Mobile-friendly cards */
+            .premium-card {
+                padding: clamp(1.5rem, 4vw, 2.5rem) !important;
+                margin-bottom: 1.5rem;
+            }
+            
+            /* Better mobile navigation */
+            nav {
+                padding-left: env(safe-area-inset-left);
+                padding-right: env(safe-area-inset-right);
+            }
+            
+            /* Prevent text overflow */
+            p, span, div {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            /* Better mobile images */
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+            
+            /* Mobile button improvements */
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 100%;
+                font-size: 16px; /* Prevents zoom on iOS */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* Mobile dropdown improvements */
+            .mobile-dropdown {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-out;
+            }
+            
+            .mobile-dropdown:not(.hidden) {
+                max-height: 500px;
+            }
+        }
+        
+        /* iOS specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            /* iOS Safari specific styles */
+            body {
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            input, textarea, select {
+                font-size: 16px; /* Prevents zoom on focus */
+            }
+        }
+        
+        /* Android specific fixes */
+        @media screen and (-webkit-min-device-pixel-ratio: 0) {
+            /* Better rendering on Android */
+            * {
+                -webkit-font-smoothing: antialiased;
+            }
         }
         
         /* Premium gradient backgrounds */
@@ -365,9 +473,9 @@
 </head>
 <body class="bg-white text-gray-900">
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass transition-all duration-300" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+    <nav class="fixed top-0 left-0 right-0 z-50 glass transition-all duration-300" id="navbar" style="padding-top: env(safe-area-inset-top);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 sm:h-20">
                 <div class="flex items-center">
                     <a href="/" class="flex items-center space-x-3">
                         <img class="h-9 w-auto" src="Opendeck/opendeck final.png" alt="Opendeck Logo">
@@ -516,7 +624,7 @@
                     <a href="#contact" class="btn-primary text-sm">Contact Us</a>
                 </div>
                 <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="p-2 text-gray-700">
+                    <button id="mobile-menu-btn" class="p-3 text-gray-700 min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Toggle menu">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                         </svg>
@@ -525,8 +633,8 @@
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden glass border-t">
-            <div class="px-6 py-4 space-y-4">
+        <div id="mobile-menu" class="hidden md:hidden glass border-t" style="padding-bottom: env(safe-area-inset-bottom);">
+            <div class="px-4 sm:px-6 py-4 space-y-4">
                 <div>
                     <button class="mobile-dropdown-trigger w-full flex items-center justify-between text-gray-700 hover:text-opendeck-500 font-medium" data-mobile-dropdown="products">
                         Products
@@ -599,33 +707,33 @@
                         <a href="#contact" class="block text-gray-600 hover:text-opendeck-500 text-sm">Contact</a>
                     </div>
                 </div>
-                <a href="signin.html" class="block text-gray-700 hover:text-opendeck-500 font-medium">Sign In</a>
-                <a href="#contact" class="block btn-primary text-center">Contact Us</a>
+                <a href="signin.html" class="block text-gray-700 hover:text-opendeck-500 font-medium py-3 min-h-[44px] flex items-center">Sign In</a>
+                <a href="#contact" class="block btn-primary text-center w-full">Contact Us</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-24 hero-pattern">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <section class="pt-20 sm:pt-24 md:pt-32 pb-16 sm:pb-20 md:pb-24 hero-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="animate-on-scroll">
                     <div class="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-opendeck-500/10 to-opendeck-600/10 border border-opendeck-500/20 text-opendeck-700 text-sm font-semibold mb-6">
                         The World's First AI-Powered Open-Finance Payments Platform
                     </div>
-                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 tracking-tight">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6 tracking-tight">
                         <span class="gradient-text">Open-Finance</span><br>
                         Infrastructure<br>
                         <span class="text-gray-900">for the Future</span>
                     </h1>
-                    <p class="text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl">
+                    <p class="text-base sm:text-lg md:text-xl text-gray-600 mb-6 sm:mb-10 leading-relaxed max-w-2xl">
                         Payments platform built on machine learning and open-finance foundations. Empowering businesses with intelligent payment solutions, real-time affordability checks, and predictive analytics—all powered by A.I.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#contact" class="btn-primary text-center">Get Started</a>
-                        <a href="developers.html" class="btn-secondary text-center">View Docs</a>
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                        <a href="#contact" class="btn-primary text-center w-full sm:w-auto">Get Started</a>
+                        <a href="developers.html" class="btn-secondary text-center w-full sm:w-auto">View Docs</a>
                     </div>
-                    <div class="mt-12 flex items-center space-x-8 text-sm text-gray-500">
+                    <div class="mt-8 sm:mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 text-sm text-gray-500">
                         <div class="flex items-center">
                             <svg class="h-5 w-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
@@ -651,21 +759,21 @@
     </section>
 
     <!-- Solutions Section -->
-    <section id="solutions" class="py-24 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="text-center mb-20 animate-on-scroll">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Solutions for Every Scale</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Tailored solutions that grow with your business, from startups to enterprises.</p>
+    <section id="solutions" class="py-12 sm:py-16 md:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16 md:mb-20 animate-on-scroll">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 tracking-tight px-4">Solutions for Every Scale</h2>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">Tailored solutions that grow with your business, from startups to enterprises.</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="premium-card p-10 animate-on-scroll">
-                    <div class="icon-bg w-16 h-16 flex items-center justify-center rounded-xl mb-6">
-                        <svg class="h-8 w-8 text-opendeck-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                <div class="premium-card p-6 sm:p-8 md:p-10 animate-on-scroll">
+                    <div class="icon-bg w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center rounded-xl mb-4 sm:mb-6">
+                        <svg class="h-7 w-7 sm:h-8 sm:w-8 text-opendeck-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Enterprise & Government</h3>
-                    <p class="text-gray-600 mb-8 text-lg leading-relaxed">Enterprise-grade infrastructure designed for scale, compliance, and security. Trusted by governments and Fortune 500 companies.</p>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Enterprise & Government</h3>
+                    <p class="text-gray-600 mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed">Enterprise-grade infrastructure designed for scale, compliance, and security. Trusted by governments and Fortune 500 companies.</p>
                     <ul class="space-y-4">
                         <li class="flex items-start">
                             <svg class="h-6 w-6 text-green-500 mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
@@ -687,14 +795,14 @@
                         </li>
                     </ul>
                 </div>
-                <div class="premium-card p-10 bg-gradient-hero text-white animate-on-scroll">
-                    <div class="bg-white/20 w-16 h-16 flex items-center justify-center rounded-xl mb-6 backdrop-blur-sm">
-                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="premium-card p-6 sm:p-8 md:p-10 bg-gradient-hero text-white animate-on-scroll">
+                    <div class="bg-white/20 w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center rounded-xl mb-4 sm:mb-6 backdrop-blur-sm">
+                        <svg class="h-7 w-7 sm:h-8 sm:w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Business & Individual</h3>
-                    <p class="text-blue-100 mb-8 text-lg leading-relaxed">Powerful yet simple solutions for growing businesses and entrepreneurs. Get started in minutes, scale to millions.</p>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Business & Individual</h3>
+                    <p class="text-blue-100 mb-6 sm:mb-8 text-base sm:text-lg leading-relaxed">Powerful yet simple solutions for growing businesses and entrepreneurs. Get started in minutes, scale to millions.</p>
                     <ul class="space-y-4">
                         <li class="flex items-start">
                             <svg class="h-6 w-6 text-white mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
@@ -721,32 +829,32 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="text-center mb-20 animate-on-scroll">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Built for Scale</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Enterprise-grade infrastructure with developer-first design principles.</p>
+    <section id="features" class="py-12 sm:py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16 md:mb-20 animate-on-scroll">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 tracking-tight px-4">Built for Scale</h2>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">Enterprise-grade infrastructure with developer-first design principles.</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="premium-card p-8 animate-on-scroll">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                <div class="premium-card p-6 sm:p-8 animate-on-scroll">
                     <div class="icon-bg w-14 h-14 flex items-center justify-center rounded-xl mb-6">
                         <svg class="h-7 w-7 text-opendeck-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Lightning Fast</h3>
-                    <p class="text-gray-600 leading-relaxed">Process thousands of transactions per second with sub-100ms latency. Built on modern infrastructure for peak performance.</p>
+                    <h3 class="text-lg sm:text-xl font-bold mb-3">Lightning Fast</h3>
+                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Process thousands of transactions per second with sub-100ms latency. Built on modern infrastructure for peak performance.</p>
                 </div>
-                <div class="premium-card p-8 animate-on-scroll">
+                <div class="premium-card p-6 sm:p-8 animate-on-scroll">
                     <div class="icon-bg w-14 h-14 flex items-center justify-center rounded-xl mb-6">
                         <svg class="h-7 w-7 text-opendeck-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Bank-Grade Security</h3>
-                    <p class="text-gray-600 leading-relaxed">Enterprise-level security with end-to-end encryption, fraud detection, and compliance with global standards.</p>
+                    <h3 class="text-lg sm:text-xl font-bold mb-3">Bank-Grade Security</h3>
+                    <p class="text-sm sm:text-base text-gray-600 leading-relaxed">Enterprise-level security with end-to-end encryption, fraud detection, and compliance with global standards.</p>
                 </div>
-                <div class="premium-card p-8 animate-on-scroll">
+                <div class="premium-card p-6 sm:p-8 animate-on-scroll">
                     <div class="icon-bg w-14 h-14 flex items-center justify-center rounded-xl mb-6">
                         <svg class="h-7 w-7 text-opendeck-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
@@ -769,14 +877,14 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-24 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="about" class="py-12 sm:py-16 md:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="animate-on-scroll">
                     <div class="inline-flex items-center px-4 py-2 rounded-full bg-opendeck-50 text-opendeck-700 text-sm font-semibold mb-6">
                         <span class="mr-2">🏆</span> Industry First
                     </div>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">About Opendeck</h2>
+                    <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 tracking-tight px-4">About Opendeck</h2>
                     <p class="text-lg text-gray-600 mb-6 leading-relaxed">We are the world's first ML-powered open-finance payments platform, revolutionizing the future of payments by combining machine learning intelligence with robust open-finance infrastructure. Our platform enables businesses of all sizes to create innovative, secure, and intelligent payment solutions.</p>
                     <p class="text-lg text-gray-600 mb-10 leading-relaxed">Our mission is building an inclusive context aware payments platform.</p>
                     <div class="grid grid-cols-3 gap-6">
@@ -805,13 +913,13 @@
     </section>
 
     <!-- PSD3 User Education Section -->
-    <section id="education" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="education" class="py-12 sm:py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 animate-on-scroll">
                 <div class="inline-flex items-center px-4 py-2 rounded-full bg-opendeck-50 text-opendeck-700 text-sm font-semibold mb-6">
                     <span class="mr-2">📚</span> Payment Services Education
                 </div>
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Understanding Payment Services</h2>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight px-4">Understanding Payment Services</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">Important information about payment services, your rights, and how to use our platform safely and securely.</p>
             </div>
 
@@ -935,7 +1043,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold">Fees & Charges</h3>
+                        <h3 class="text-xl sm:text-2xl font-bold">Fees & Charges</h3>
                     </div>
                     <div class="space-y-4 text-gray-600">
                         <p class="leading-relaxed">All fees and charges are clearly disclosed before you authorize any payment. We are transparent about:</p>
@@ -969,7 +1077,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold">If Something Goes Wrong</h3>
+                        <h3 class="text-xl sm:text-2xl font-bold">If Something Goes Wrong</h3>
                     </div>
                     <div class="space-y-4 text-gray-600">
                         <p class="leading-relaxed">If you notice an unauthorized transaction or have concerns about your account:</p>
@@ -994,7 +1102,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
                         </svg>
                     </div>
-                    <h3 class="text-2xl font-bold">Data Protection & Privacy</h3>
+                    <h3 class="text-xl sm:text-2xl font-bold">Data Protection & Privacy</h3>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
                     <div>
@@ -1069,23 +1177,23 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-24 gradient-hero relative overflow-hidden">
+    <section id="contact" class="py-12 sm:py-16 md:py-24 gradient-hero relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-opendeck-900/50 to-opendeck-700/50"></div>
-        <div class="max-w-4xl mx-auto px-6 lg:px-8 relative z-10">
-            <div class="text-center animate-on-scroll mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">Ready to Get Started?</h2>
-                <p class="text-xl mb-10 text-blue-100 max-w-2xl mx-auto leading-relaxed">Join thousands of businesses already using Opendeck to power their financial infrastructure.</p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
-                    <button id="operator-register-btn" class="bg-white text-opendeck-500 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">Register as Operator</button>
-                    <a href="mailto:info@opendeck.co.uk?subject=Sales%20Inquiry%20-%20Opendeck" class="glass text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/20 transition-all duration-300 border border-white/30 text-center">Contact Sales</a>
-                    <a href="developers.html" class="glass text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/20 transition-all duration-300 border border-white/30 text-center">View Documentation</a>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center animate-on-scroll mb-8 sm:mb-12">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-white tracking-tight px-4">Ready to Get Started?</h2>
+                <p class="text-base sm:text-lg md:text-xl mb-6 sm:mb-10 text-blue-100 max-w-2xl mx-auto leading-relaxed px-4">Join thousands of businesses already using Opendeck to power their financial infrastructure.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-6 sm:mb-8 px-4">
+                    <button id="operator-register-btn" class="bg-white text-opendeck-500 px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 w-full sm:w-auto min-h-[44px] text-base sm:text-lg">Register as Operator</button>
+                    <a href="mailto:info@opendeck.co.uk?subject=Sales%20Inquiry%20-%20Opendeck" class="glass text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-white/20 transition-all duration-300 border border-white/30 text-center w-full sm:w-auto min-h-[44px] text-base sm:text-lg">Contact Sales</a>
+                    <a href="developers.html" class="glass text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-white/20 transition-all duration-300 border border-white/30 text-center w-full sm:w-auto min-h-[44px] text-base sm:text-lg">View Documentation</a>
                 </div>
             </div>
 
             <!-- Operator Registration Form -->
             <div id="operator-register-form" class="hidden premium-card p-8 animate-on-scroll">
                 <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-bold text-gray-900">Register as Operator</h3>
+                    <h3 class="text-xl sm:text-2xl font-bold text-gray-900">Register as Operator</h3>
                     <button id="close-form-btn" class="text-gray-500 hover:text-gray-700">
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
