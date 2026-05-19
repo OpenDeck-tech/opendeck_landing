@@ -2138,6 +2138,33 @@ Content-Type: application/json
                     </div>
 
                     <div class="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 mt-4">
+                        <h5 class="font-semibold mb-3 text-white">Split Payments (Pay in Two)</h5>
+                        <p class="text-gray-300 mb-3 text-sm">Let attendees split the checkout total evenly between two payers. Each person authorizes their half via open banking; the venue receives the full amount once both payments complete.</p>
+                        <ul class="list-disc list-inside text-gray-300 mb-4 space-y-1 text-sm">
+                            <li><strong>50/50 split</strong> — e.g. £80 order → £40 per payer</li>
+                            <li><strong>Co-payer invite</strong> — send a link or email; both must confirm</li>
+                            <li><strong>Settlement</strong> — order completes only when both halves succeed</li>
+                        </ul>
+                        <pre class="bg-[#0a0a0a] text-white p-4 rounded-lg overflow-x-auto text-sm mb-3"><code>POST /api/events/payments
+Authorization: Bearer USER_TOKEN
+Content-Type: application/json
+
+{
+  "event_id": "event-uuid-here",
+  "payment_type": "ticket",
+  "amount": 80.00,
+  "currency": "GBP",
+  "split_count": 2,
+  "split_payers": [
+    { "user_id": "user-primary-uuid", "amount": 40.00 },
+    { "user_id": "user-copayer-uuid", "amount": 40.00 }
+  ],
+  "payment_source": "open_banking"
+}</code></pre>
+                        <p class="text-sm text-gray-300">Set <code class="bg-[#2a2a2a] px-1 rounded">split_count</code> to <code class="bg-[#2a2a2a] px-1 rounded">2</code> to enable pay-in-two. Omit it for a single-payer checkout. Pension micro-contributions are calculated on the full order amount.</p>
+                    </div>
+
+                    <div class="bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg p-6 mt-4">
                         <h5 class="font-semibold mb-3 text-white">How It Works</h5>
                         <ol class="list-decimal list-inside text-gray-300 mb-3 space-y-2 text-sm">
                             <li><strong>Register Your Venue</strong> - Create a venue account and enable micro-contributions</li>

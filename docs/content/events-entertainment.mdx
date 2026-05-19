@@ -1,6 +1,6 @@
 # Events & Entertainment
 
-Proprietary feature: Automatic pension micro-contributions (0.01%) from event payments.
+Split payments in two, plus automatic pension micro-contributions (0.01%) from event payments.
 
 <Alert type="info" title="Proprietary Feature">
 ✨ This is a unique Opendeck feature that automatically contributes 0.01% of event payments to users' pension accounts.
@@ -15,6 +15,35 @@ When users make payments at events (concerts, sports matches, festivals), Opende
 - Automatic micro-contribution: £0.0075 (0.01% of £75)
 - Payment processed normally
 - Micro-contribution added to pension account
+
+## Split Payments (Pay in Two)
+
+Attendees can split the checkout total evenly between two payers. Each person authorizes their half via open banking; the venue receives the full amount once both payments complete.
+
+**Example:**
+- Two friends buy gig tickets for £80 total
+- Each pays £40 via open banking
+- Order completes when both halves succeed
+- Pension micro-contribution (0.01%) is calculated on the full £80
+
+<APIEndpoint method="POST" path="/api/events/payments" description="Process split event payment">
+```json
+{
+  "event_id": "event_12345",
+  "payment_type": "ticket",
+  "amount": 80.00,
+  "currency": "GBP",
+  "split_count": 2,
+  "split_payers": [
+    { "user_id": "user_primary", "amount": 40.00 },
+    { "user_id": "user_copayer", "amount": 40.00 }
+  ],
+  "payment_source": "open_banking"
+}
+```
+</APIEndpoint>
+
+Set `split_count` to `2` to enable pay-in-two. Omit it for a single-payer checkout.
 
 ## Step 1: Register as Event Venue
 
